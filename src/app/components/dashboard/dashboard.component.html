@@ -1,0 +1,132 @@
+<div>
+    <mat-toolbar class="mat-toobar">
+        <mat-toolbar-row>
+            <div fxLayout="row" fxFlex="100" fxLayoutAlign="start start">
+                <div>
+                    <button mat-icon-button (click)="drawer.toggle()">
+                        <mat-icon>menu</mat-icon>
+                    </button>
+                </div>
+                <div>
+                    <div fxFlex="30" fxHide.xs>
+                        <img mat-img class="logo" src="https://www.google.com/images/icons/product/keep-512.png">
+                    </div>
+                    <span>Fundoo Notes</span>
+                </div>
+                <div>
+                    <mat-card class="searchInput" routerLink="search" fxLayoutAlign="center center">
+                        <button mat-icon-button class="searchButton">
+                            <mat-icon>search</mat-icon>
+                        </button>
+                        <input fxFlex="100" class="searchInputBox" placeholder="Search">
+                        <button mat-icon-button>
+                            <mat-icon (click)=close()>close</mat-icon>
+                        </button>
+                    </mat-card>
+                </div>
+            </div>
+
+            <div fxLayout="row" fxFlex=30 fxLayoutAlign="space-between center">
+                <div fxLayout="row" fxFlex=70>
+                    <button mat-icon-button>
+                        <mat-icon>refresh</mat-icon>
+                    </button>
+                    <button mat-icon-button (click)="changeView()">
+                        <mat-icon *ngIf="isGrid">view_stream</mat-icon>
+                        <mat-icon *ngIf="!isGrid">view_module</mat-icon>
+                    </button>
+                    <button mat-icon-button>
+                        <mat-icon>settings</mat-icon>
+                    </button>
+                </div>
+                <div fxLayout="row" fxFlex=30>
+                    <button mat-icon-button fxShow="true" fxHide.sm>
+                        <mat-icon>apps</mat-icon>
+                    </button>
+                    <button mat-icon-button class="profileButton" [matMenuTriggerFor]="profileMenu" (click)="account()"
+                        fxShow="true">
+                        <img class="profilepic" src="/assets/images/profile.jpg">
+                    </button>
+                </div>
+                <div>
+                    <mat-menu class="custom" #profileMenu=matMenu xPosition="before">
+                        <div fxLayout="column">
+                            <div fxLayout="row" fxLayoutAlign="space-around start" style="margin: 20px;">
+                                <div><img class="profilePicButton" src="/assets/images/profile.jpg"></div>
+                                <div fxLayout="column">
+                                    <span class="nameStyle">{{fullName}}</span>
+                                    <span class="emailStyle">{{email}}</span>
+                                </div>
+                            </div>
+                            <mat-divider style="margin-bottom: 8px"></mat-divider>
+                            <div fxLayout="row" fxLayoutAlign="space-between center" style="padding: 8px 0;">
+                                <div><button class="flatButton" mat-flat-button>Add account</button></div>
+                                <div><button class="flatButton" (click)="logout()" mat-flat-button>Sign out</button>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-menu>
+                </div>
+            </div>
+        </mat-toolbar-row>
+    </mat-toolbar>
+    <mat-divider></mat-divider>
+</div>
+<div fxFlexFill class="flexContainer">
+    <mat-drawer-container class="mat-drawer-container">
+        <mat-drawer #drawer mode="side" style="border:0px" disableClose>
+            <div fxLayout=column>
+                <button mat-raised-button class="menuButton" routerLink="notes" [disableRipple]="true">
+                    <mat-icon style="margin-right:40px;margin-left:10px">
+                        lightbulb_outline
+                    </mat-icon>
+                    Notes
+                </button>
+                <button mat-raised-button class="menuButton" [disableRipple]="true">
+                    <mat-icon style="margin-right:40px;margin-left:10px">
+                        notifications_none
+                    </mat-icon>
+                    Reminders
+                </button>
+                <mat-divider style="margin: 7px"></mat-divider>
+                <span style="line-height: 1rem;font-size: .6875rem;padding: 10px 24px 10px;">
+                    LABELS
+                </span>
+                <div *ngIf="labels ? labels.length>0: false">
+                    <div *ngFor="let label of labels">
+                        <button mat-raised-button class="menuButton" routerLink="labels/{{label.labelName}}"
+                            routerLinkActive="active" [disableRipple]="true">
+                            <mat-icon style="margin-right:40px;margin-left:10px">
+                                <img src="assets/icons/label-24px.svg">
+                            </mat-icon>
+                            {{label.labelName}}
+                        </button>
+                    </div>
+                </div>
+                <button mat-raised-button class="menuButton" [disableRipple]="true" (click)="onEditLabels()">
+                    <mat-icon style="margin-right:40px;margin-left:10px">
+                        <img src="assets/icons/create-24px.svg">
+                    </mat-icon>
+                    Edit Labels
+                </button>
+                <mat-divider style="margin: 7px"></mat-divider>
+
+                <button mat-raised-button class="menuButton" routerLink="archive" [disableRipple]="true">
+                    <mat-icon style="margin-right:40px;margin-left:10px">
+                        <img src="assets/icons/archive-24px.svg">
+                    </mat-icon>
+                    Archive
+                </button>
+                <button mat-raised-button class="menuButton" routerLink="bin" [disableRipple]="true">
+                    <mat-icon style="margin-right:40px;margin-left:10px">
+                        delete
+                    </mat-icon>
+                    Trash
+                </button>
+            </div>
+        </mat-drawer>
+        <mat-drawer-content>
+            <router-outlet></router-outlet>
+        </mat-drawer-content>
+    </mat-drawer-container>
+</div>

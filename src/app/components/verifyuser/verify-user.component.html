@@ -1,0 +1,23 @@
+<app-toolbar></app-toolbar>
+<div>
+    <mat-toolbar fxLayout="column" fxLayoutAlign="space-around center">
+        <span>Verification Page</span>
+    </mat-toolbar>
+</div>
+
+<div class="verify-container">
+    <mat-card class="loginVerifyCard">
+        <div fxLayout="column" fxLayoutAlign="space-around center">
+            <mat-card-content>
+                <div>
+                    <p>
+                        Please click on 'Verify' to verify yourself.
+                    </p>
+                </div>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-raised-button (click)="verifyUser()" color="primary">Verify</button>
+            </mat-card-actions>
+        </div>
+    </mat-card>
+</div>

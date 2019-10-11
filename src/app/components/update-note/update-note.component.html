@@ -1,0 +1,21 @@
+<div style="padding: 0px;">
+    <div>
+        <form>
+            <div class="title">
+                <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
+                    cdkAutosizeMaxRows="5" class="textarea title-font" placeholder="Title" [formControl]="title"
+                    [(ngModel)]="note.title" autocomplete="off"></textarea>
+            </div>
+            <div class="description">
+                <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
+                    cdkAutosizeMaxRows="30" class="textarea description-font" placeholder="Note"
+                    [formControl]="description" [(ngModel)]="note.description" autocomplete="off"></textarea>
+            </div>
+            <div style="margin: 4px;">
+                <div style="align-content: flex-end;">
+                    <button class="close-button" type="button" mat-button (click)="onClose()">Close</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

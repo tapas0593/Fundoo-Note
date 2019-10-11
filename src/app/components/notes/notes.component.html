@@ -1,0 +1,24 @@
+<app-addnote></app-addnote>
+<div>
+    <div fxFlex="80" fxLayout="{{direction}} wrap" class="side" [ngClass]="direction === 'row' ? 'row-content': 'column-content'">
+        <div *ngFor="let note of notes" style="align-self: center;">
+            <mat-card class="matcard1" (click)="onUpdate(note)"
+                [ngClass]="direction === 'row' ? 'grid-mat-card': 'list-mat-card'">
+                <form>
+                    <div>
+                        <div class="title">
+                            <textarea class="text title-font" matInput cdkTextareaAutosize
+                                #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" disabled>{{note.title}}
+                            </textarea>
+                        </div>
+                        <div class="description">
+                            <textarea class="text description-font" matInput cdkTextareaAutosize
+                                #autosize="cdkTextareaAutosize" disabled>{{note.description}}
+                            </textarea>
+                        </div>
+                    </div>
+                </form>
+            </mat-card>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+<div fxLayout="column" fxLayoutAlign="left center" style="margin: 32px auto 16px auto;
+position: relative;">
+    <div *ngIf="!expand">
+        <mat-card class="noteEditCard1" [class.mat-elevation-z4]="true">
+            <mat-card-content fxlayout="row" fxLayoutAlign="space-between center" style="height: inherit;"
+                (click)="expandNote()">
+                <div>
+                    <span style="font-family: sans-serif; font-size: 16px; color: grey; margin-left: 10px;">Take a
+                        note...</span>
+                </div>
+                <div fxlayout="row">
+                    <button mat-icon-button style="right: 26px">
+                        <mat-icon><img src="assets/icons/check_box-24px.svg"></mat-icon>
+                    </button>
+                    <button mat-icon-button style="right: 12px">
+                        <mat-icon>brush</mat-icon>
+                    </button>
+                    <button mat-icon-button style="right: 2px">
+                        <mat-icon><img src="assets/icons/image-24px.svg"></mat-icon>
+                    </button>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <mat-card class="noteEditCard2" [class.mat-elevation-z4]="true" fxLayoutAlign="space-between center" *ngIf="expand">
+        <form [formGroup]="formGroup">
+            <div data-text="Take a Note">
+                <input matInput placeholder="Title" class="textarea title" formControlName="title" autocomplete="off" />
+            </div>
+            <div data-text="Take a Note">
+                <textarea matInput placeholder="Take a Note" class="textarea description" matTextareaAutosize
+                    formControlName="description" autocomplete="off"></textarea>
+            </div>
+            <div>
+                <button type="button" mat-flat-button class="close" mat-button (click)="onClose()"
+                    fxLayoutAlign="end center">
+                    Close
+                </button>
+            </div>
+        </form>
+    </mat-card>
+</div>
