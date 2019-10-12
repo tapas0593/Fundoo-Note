@@ -1,18 +1,18 @@
-<div style="padding: 0px;">
+<div>
     <div>
         <form>
             <div class="title">
                 <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
-                    cdkAutosizeMaxRows="5" class="textarea title-font" placeholder="Title" [formControl]="title"
+                    cdkAutosizeMaxRows="10" class="textarea title-font" placeholder="Title" [formControl]="title"
                     [(ngModel)]="note.title" autocomplete="off"></textarea>
             </div>
             <div class="description">
                 <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
-                    cdkAutosizeMaxRows="30" class="textarea description-font" placeholder="Note"
+                    cdkAutosizeMaxRows="15" class="textarea description-font" placeholder="Note"
                     [formControl]="description" [(ngModel)]="note.description" autocomplete="off"></textarea>
             </div>
             <div style="margin: 4px;">
-                <div style="align-content: flex-end;">
+                <div>
                     <button class="close-button" type="button" mat-button (click)="onClose()">Close</button>
                 </div>
             </div>

@@ -8,9 +8,9 @@
   padding: 0px;
 }
 
-.row-content {
-  width: 784px;
-}
+// .row-content {
+//   width: 784px;
+// }
 
 .column-content {
   width: 632px;
@@ -36,8 +36,9 @@
   font-family: Roboto, Arial, sans-serif;
   white-space: unset;
   word-wrap: break-word;
-  color: #202124;  width: -webkit-fill-available;
-  overflow: hidden;
+  color: #202124;
+  width: -webkit-fill-available;
+  overflow: show;
   padding: 0px;
 }
 

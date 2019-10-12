@@ -1,6 +1,6 @@
 export class Label {
-    labelId: BigInteger;
-    userId: BigInteger;
-    labelName: String;
+    labelId: bigint;
+    userId: bigint;
+    labelName: string;
    // notes: Note[];
 }

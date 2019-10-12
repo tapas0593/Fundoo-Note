@@ -1,1 +1,35 @@
-<p>edit-label works!</p>
+<div>
+    <form [formGroup]="formGroup">
+        <div class="dialog-main">
+            <div class="heading">Edit Labels</div>
+
+            <div fxLayout="row" class="contents">
+                <button mat-icon-button>
+                    <mat-icon class="labelIcon">close</mat-icon>
+                </button>
+                <input matInput class="text" formControlName="labelName" placeholder="Create new label"
+                    autocomplete="off">
+                <button mat-icon-button (click)="createLabel()">
+                    <mat-icon class="labelIcon">check</mat-icon>
+                </button>
+            </div>
+            <div fxLayout=column fxLayoutAlign="center center">
+                <div *ngFor="let label of labels" fxLayout="row" class="contents">
+                    <button mat-icon-button (click)="deleteLabel(label.labelId)">
+                        <mat-icon class="labelIcon">delete</mat-icon>
+                    </button>
+                    <input matInput class="text" #myInput (change)="updateLabel(label)" value={{label.labelName}}
+                        (input)="labelName=$event.target.value" autocomplete="off">
+                    <button mat-icon-button (click)="focusInput(myInput)">
+                        <mat-icon class="labelIcon">edit</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="dialog-footer">
+            <div>
+                <button mat-flat-button class="flat-button" (click)="onDone()">Done</button>
+            </div>
+        </div>
+    </form>
+</div>

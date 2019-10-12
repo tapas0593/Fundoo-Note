@@ -1,0 +1,47 @@
+.label {
+  width: 450px;
+}
+
+.dialog-main {
+  max-height: 392px;
+  overflow-y: auto;
+  padding: 15px;
+}
+.dialog-footer {
+  border-top: 1px solid #dadce0;
+  padding: 15px 10px;
+  text-align: right;
+}
+.heading {
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 1em;
+  font-weight: 600;
+  height: 25px;
+}
+.contents {
+  height: 45px;
+}
+.labelButton {
+  height: 24px;
+  opacity: 0.54;
+  width: 24px;
+}
+.labelIcon {
+  height: 24px;
+  opacity: 0.54;
+  width: 24px;
+}
+.text {
+  outline: none;
+  border: none;
+  margin: 0 15px;
+  font-size: 14px;
+  height: 25px;
+  align-self: center;
+}
+
+.flat-button {
+  padding: 8px 24px;
+  line-height: 1.25rem;
+  height: 36px;
+}

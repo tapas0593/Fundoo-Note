@@ -52,7 +52,7 @@ import { EditLabelComponent } from './components/edit-label/edit-label.component
     MaterialModule,
     HttpClientModule
   ],
-  entryComponents: [UpdateNoteComponent],
+  entryComponents: [UpdateNoteComponent, EditLabelComponent],
   providers: [UserService, LabelService, NoteService, ViewService],
   bootstrap: [AppComponent]
 })

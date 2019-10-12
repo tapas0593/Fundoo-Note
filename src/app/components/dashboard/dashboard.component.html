@@ -103,7 +103,7 @@
                         </button>
                     </div>
                 </div>
-                <button mat-raised-button class="menuButton" [disableRipple]="true" (click)="onEditLabels()">
+                <button mat-flat-button class="menuButton" [disableRipple]="true" (click)="onEditLabels()">
                     <mat-icon style="margin-right:40px;margin-left:10px">
                         <img src="assets/icons/create-24px.svg">
                     </mat-icon>
@@ -111,13 +111,13 @@
                 </button>
                 <mat-divider style="margin: 7px"></mat-divider>
 
-                <button mat-raised-button class="menuButton" routerLink="archive" [disableRipple]="true">
+                <button mat-flat-button type="button" class="menuButton" routerLink="archive" [disableRipple]="true">
                     <mat-icon style="margin-right:40px;margin-left:10px">
                         <img src="assets/icons/archive-24px.svg">
                     </mat-icon>
                     Archive
                 </button>
-                <button mat-raised-button class="menuButton" routerLink="bin" [disableRipple]="true">
+                <button mat-flat-button class="menuButton" routerLink="bin" [disableRipple]="true">
                     <mat-icon style="margin-right:40px;margin-left:10px">
                         delete
                     </mat-icon>

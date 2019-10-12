@@ -19,12 +19,16 @@ export class DashboardComponent implements OnInit {
   email: string;
   fullName: string;
   constructor(private viewService: ViewService, private labelService: LabelService, private router: Router, private dialog: MatDialog) {
-    this.getLabels();
     this.email = localStorage.getItem('email');
     this.fullName = localStorage.getItem('firstName') + ' ' + localStorage.getItem('lastName');
+    console.log('inside dashboard const');
+
   }
 
   ngOnInit() {
+    this.getLabels();
+    console.log('inside dashboard init');
+    
   }
 
   changeView() {
@@ -36,7 +40,7 @@ export class DashboardComponent implements OnInit {
 
   getLabels() {
     this.labelService.getLabels().subscribe(
-      (response) => {
+      (response: any) => {
         this.labels = response.body;
       }
     );
@@ -48,10 +52,12 @@ export class DashboardComponent implements OnInit {
   }
   onEditLabels() {
     const dialogRef = this.dialog.open(EditLabelComponent, {
-      width: '350px'
+      width: '315px',
+      data: this.labels,
+      panelClass: 'custom-dialog-container'
     });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed' + result);
+    dialogRef.afterClosed().subscribe(() => {
+      console.log('The dialog was closed');
     });
   }
 }
