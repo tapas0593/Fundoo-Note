@@ -28,7 +28,6 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.getLabels();
     console.log('inside dashboard init');
-    
   }
 
   changeView() {
@@ -59,5 +58,11 @@ export class DashboardComponent implements OnInit {
     dialogRef.afterClosed().subscribe(() => {
       console.log('The dialog was closed');
     });
+  }
+  onArchive() {
+    this.router.navigateByUrl('dashboard/archive')
+  }
+  onTrash() {
+    this.router.navigateByUrl('dashboard/trash')
   }
 }

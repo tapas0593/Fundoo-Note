@@ -44,6 +44,9 @@ const routes: Routes = [
         path: '', component: NotesComponent
       },
       {
+        path: 'notes', redirectTo: '/dashboard', pathMatch: 'full'
+      },
+      {
         path: 'trash', component: TrashComponent
       },
       {

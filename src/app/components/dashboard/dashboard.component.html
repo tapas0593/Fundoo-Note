@@ -111,13 +111,13 @@
                 </button>
                 <mat-divider style="margin: 7px"></mat-divider>
 
-                <button mat-flat-button type="button" class="menuButton" routerLink="archive" [disableRipple]="true">
+                <button mat-flat-button type="button" class="menuButton" (click)="onArchive()" [disableRipple]="true">
                     <mat-icon style="margin-right:40px;margin-left:10px">
                         <img src="assets/icons/archive-24px.svg">
                     </mat-icon>
                     Archive
                 </button>
-                <button mat-flat-button class="menuButton" routerLink="bin" [disableRipple]="true">
+                <button mat-flat-button class="menuButton" (click)="onTrash()" [disableRipple]="true">
                     <mat-icon style="margin-right:40px;margin-left:10px">
                         delete
                     </mat-icon>

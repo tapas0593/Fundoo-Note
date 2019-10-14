@@ -1,24 +1,28 @@
 <app-addnote></app-addnote>
-<div>
-    <div fxLayout="{{direction}} wrap" fxLayoutAlign=" center" class="side" [ngClass]="direction === 'row' ? 'row-content': 'column-content'">
+<app-display-notes [notes]="notes"></app-display-notes>
+<!-- <div>
+    <div fxLayout="{{direction}} wrap" fxLayoutAlign=" center" class="side"
+        [ngClass]="direction === 'row' ? 'row-content': 'column-content'">
         <div *ngFor="let note of notes" style="align-self: center;">
-            <mat-card class="matcard1" (click)="onUpdate(note)"
-                [ngClass]="direction === 'row' ? 'grid-mat-card': 'list-mat-card'">
-                <form>
-                    <div>
-                        <div class="title">
-                            <textarea class="text title-font" matInput cdkTextareaAutosize
-                                #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" disabled>{{note.title}}
+            <mat-card class="matcard1" [ngClass]="direction === 'row' ? 'grid-mat-card': 'list-mat-card'" [ngStyle]="{'background-color': note.color}">
+                <div (click)="onUpdate(note)">
+                    <div class="title">
+                        <textarea class="text title-font" [ngStyle]="{'background-color': note.color}" matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+                            cdkAutosizeMaxRows="5" disabled>{{note.title}}
                             </textarea>
-                        </div>
-                        <div class="description">
-                            <textarea class="text description-font" matInput cdkTextareaAutosize
-                                #autosize="cdkTextareaAutosize" disabled>{{note.description}}
-                            </textarea>
-                        </div>
                     </div>
-                </form>
+                    <div class="description">
+                        <textarea class="text description-font" [ngStyle]="{'background-color': note.color}" matInput cdkTextareaAutosize
+                            #autosize="cdkTextareaAutosize" cdkAutosizeMaxRows="5" disabled>{{note.description}}
+                            </textarea>
+                    </div>
+                </div>
+                <div class="icon-toolbar">
+                    <div>
+                        <app-icons [noteInfo]=note></app-icons>
+                    </div>
+                </div>
             </mat-card>
         </div>
     </div>
-</div>
+</div> -->

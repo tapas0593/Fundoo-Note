@@ -1,17 +1,22 @@
-<div>
+<div [ngStyle]="{'background-color': note.color}">
     <div>
         <form>
             <div class="title">
                 <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
                     cdkAutosizeMaxRows="10" class="textarea title-font" placeholder="Title" [formControl]="title"
-                    [(ngModel)]="note.title" autocomplete="off"></textarea>
+                    [(ngModel)]="note.title" autocomplete="off" [ngStyle]="{'background-color': note.color}"></textarea>
             </div>
             <div class="description">
                 <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
                     cdkAutosizeMaxRows="15" class="textarea description-font" placeholder="Note"
-                    [formControl]="description" [(ngModel)]="note.description" autocomplete="off"></textarea>
+                    [formControl]="description" [(ngModel)]="note.description" autocomplete="off"
+                    [ngStyle]="{'background-color': note.color}"></textarea>
             </div>
-            <div style="margin: 4px;">
+
+            <div style="margin: 4px 4px 0;" flexLayout="row" fxLayoutAlign="space-between center">
+                <div class="appicons">
+                    <app-icons [noteInfo]=note></app-icons>
+                </div>
                 <div>
                     <button class="close-button" type="button" mat-button (click)="onClose()">Close</button>
                 </div>

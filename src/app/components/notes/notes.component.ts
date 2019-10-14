@@ -15,12 +15,12 @@ export class NotesComponent implements OnInit {
   constructor(private noteService: NoteService, private viewService: ViewService, public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.viewService.getView().subscribe(
-      (result: any) => {
-        console.log('result:' + result);
-        this.direction = result.data;
-        console.log('direction: ' + this.direction);
-      });
+    // this.viewService.getView().subscribe(
+    //   (result: any) => {
+    //     console.log('result:' + result);
+    //     this.direction = result.data;
+    //     console.log('direction: ' + this.direction);
+    //   });
     this.getAllNotes();
   }
 
@@ -32,16 +32,16 @@ export class NotesComponent implements OnInit {
       });
   }
 
-  onUpdate(note: any): void {
-    console.log('note-->', note);
-    const dialogRef = this.dialog.open(UpdateNoteComponent, {
-      width: '600px',
-      height: 'auto',
-      data: note,
-      panelClass: 'custom-dialog-container'
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
-  }
+  // onUpdate(note: any): void {
+  //   console.log('note-->', note);
+  //   const dialogRef = this.dialog.open(UpdateNoteComponent, {
+  //     width: '600px',
+  //     height: 'auto',
+  //     data: note,
+  //     panelClass: 'custom-dialog-container'
+  //   });
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     console.log('The dialog was closed');
+  //   });
+  // }
 }

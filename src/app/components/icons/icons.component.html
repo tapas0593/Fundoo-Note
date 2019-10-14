@@ -1,0 +1,56 @@
+<div>
+    <button mat-icon-button (click)="addReminder()" [matMenuTriggerFor]="menu_reminder">
+        <mat-icon class=color><img src="assets/icons/add_alert-24px.svg"></mat-icon>
+    </button>
+    <button mat-icon-button (click)="addCollab()">
+        <mat-icon class=color><img src="assets/icons/person_add-24px.svg"></mat-icon>
+    </button>
+    <button mat-icon-button (click)="colorlens()" [matMenuTriggerFor]="menu_colors">
+        <mat-icon class=color><img src="assets/icons/color_lens-24px.svg"></mat-icon>
+    </button>
+    <button mat-icon-button (click)="addPhoto()">
+        <mat-icon class=color><img src="assets/icons/image-24px.svg"></mat-icon>
+    </button>
+    <button mat-icon-button (click)="archive()">
+        <mat-icon class=color><img src="assets/icons/archive-24px.svg"></mat-icon>
+    </button>
+    <button mat-icon-button (click)="moreVert()" [matMenuTriggerFor]="menu_more">
+        <mat-icon class=color>more_vert</mat-icon>
+    </button>
+</div>
+
+<div class="color-palet">
+    <mat-menu #menu_colors="matMenu" yPosition="above">
+        <div *ngFor="let colors of  colorPalet" fxLayout="row">
+            <div *ngFor="let color of colors" style="margin: 2px;">
+                <button [ngStyle]="{'background-color':color.hexcode}" mat-mini-fab
+                    (click)=setColor(color.hexcode)></button>
+            </div>
+        </div>
+    </mat-menu>
+</div>
+
+
+<mat-menu #menu_more="matMenu">
+    <div class=button>
+        <button mat-icon-button (click)="onDelete()">Delete note</button>
+    </div>
+    <div class=button>
+        <button mat-icon-button (click)="onLabel()">Add Label</button>
+    </div>
+</mat-menu>
+
+<mat-menu #menu_reminder="matMenu">
+    <span style="margin-left: 10px">Reminder:</span>
+    <div class="reminder">
+        <div>
+            <button mat-icon-button (click)="onToday()">Today</button>
+        </div>
+        <div>
+            <button mat-icon-button (click)="onTomorrow()">Tomorrow</button>
+        </div>
+        <div>
+            <button mat-icon-button (click)="onWeek()">Next Week</button>
+        </div>
+    </div>
+</mat-menu>

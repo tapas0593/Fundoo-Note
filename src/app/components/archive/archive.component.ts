@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { NoteService } from 'src/app/service/note.service';
 
 @Component({
   selector: 'app-archive',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ArchiveComponent implements OnInit {
 
-  constructor() { }
+  archivedNotes = [];
+
+  constructor(private noteService: NoteService) { }
 
   ngOnInit() {
+    this.noteService.getArchivedNotes()
+      .subscribe((response: any) => {
+        console.log(response);
+        this.archivedNotes = response.body;
+      });
   }
-
 }

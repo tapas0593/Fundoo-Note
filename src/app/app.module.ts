@@ -24,6 +24,8 @@ import { UpdateNoteComponent } from './components/update-note/update-note.compon
 import { ViewService } from './service/view.service';
 import { MaterialModule } from './material-module/material.module';
 import { EditLabelComponent } from './components/edit-label/edit-label.component';
+import { IconsComponent } from './components/icons/icons.component';
+import { DisplayNotesComponent } from './components/display-notes/display-notes.component';
 
 
 @NgModule({
@@ -41,7 +43,9 @@ import { EditLabelComponent } from './components/edit-label/edit-label.component
     TrashComponent,
     ArchiveComponent,
     UpdateNoteComponent,
-    EditLabelComponent
+    EditLabelComponent,
+    IconsComponent,
+    DisplayNotesComponent
   ],
   imports: [
     BrowserModule,

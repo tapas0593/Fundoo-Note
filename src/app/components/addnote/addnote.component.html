@@ -25,17 +25,24 @@ position: relative;">
     <mat-card class="noteEditCard2" [class.mat-elevation-z4]="true" fxLayoutAlign="space-between center" *ngIf="expand">
         <form [formGroup]="formGroup">
             <div data-text="Take a Note">
-                <input matInput placeholder="Title" class="textarea title" formControlName="title" autocomplete="off" />
+                <textarea matInput placeholder="Title" class="textarea title" cdkTextareaAutosize
+                    #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" formControlName="title"
+                    autocomplete="off"></textarea>
             </div>
             <div data-text="Take a Note">
-                <textarea matInput placeholder="Take a Note" class="textarea description" matTextareaAutosize
-                    formControlName="description" autocomplete="off"></textarea>
+                <textarea matInput placeholder="Take a Note" class="textarea description" cdkTextareaAutosize
+                    #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" formControlName="description"
+                    autocomplete="off"></textarea>
             </div>
-            <div>
-                <button type="button" mat-flat-button class="close" mat-button (click)="onClose()"
-                    fxLayoutAlign="end center">
-                    Close
-                </button>
+            <div fxLayout="row" fxLayoutAlign="space-between center" class="icon-toolbar">
+                <div class="appicons">
+                    <app-icons [noteInfo]=note></app-icons>
+                </div>
+                <div>
+                    <button type="button" mat-flat-button class="close" mat-button (click)="onClose()">
+                        Close
+                    </button>
+                </div>
             </div>
         </form>
     </mat-card>

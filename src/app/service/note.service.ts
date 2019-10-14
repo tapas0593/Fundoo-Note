@@ -17,6 +17,12 @@ export class NoteService {
     return this.http.get(this.url + 'getnotes', httpOptions);
   }
   public updateNote(note: any) {
-    return this.http.put(this.url +'update', note, httpOptions);
+    return this.http.put(this.url + 'update', note, httpOptions);
+  }
+  public getArchivedNotes() {
+    return this.http.get(this.url + 'getArchivedNote', httpOptions);
+  }
+  public getTrashedNotes() {
+    return this.http.get(this.url + 'getTrashedNote', httpOptions);
   }
 }
