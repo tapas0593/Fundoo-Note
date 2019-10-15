@@ -26,6 +26,7 @@ import { MaterialModule } from './material-module/material.module';
 import { EditLabelComponent } from './components/edit-label/edit-label.component';
 import { IconsComponent } from './components/icons/icons.component';
 import { DisplayNotesComponent } from './components/display-notes/display-notes.component';
+import { ReminderNotesComponent } from './components/reminder-notes/reminder-notes.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { DisplayNotesComponent } from './components/display-notes/display-notes.
     UpdateNoteComponent,
     EditLabelComponent,
     IconsComponent,
-    DisplayNotesComponent
+    DisplayNotesComponent,
+    ReminderNotesComponent
   ],
   imports: [
     BrowserModule,

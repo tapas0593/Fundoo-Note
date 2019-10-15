@@ -25,4 +25,13 @@ export class NoteService {
   public getTrashedNotes() {
     return this.http.get(this.url + 'getTrashedNote', httpOptions);
   }
+  public addReminder(noteId: bigint, reminderDate: string) {
+    console.log(localStorage.getItem('token'));
+    console.log(httpOptions);
+    console.log(this.url + 'addReminder/' + noteId + '?reminderDate=' + reminderDate);
+    return this.http.get(this.url + 'addReminder/' + noteId + '?reminderDate=' + reminderDate, httpOptions);
+  }
+  public removeReminder(noteId: bigint) {
+    return this.http.get(this.url + 'removeReminder/' + noteId, httpOptions);
+  }
 }

@@ -1,0 +1,8 @@
+<div *ngIf="note.reminder!=null">
+    <mat-chip-list>
+        <mat-chip class=chip>
+            {{note.reminder}}
+            <mat-icon matChipRemove (click)="onRemoveReminder(note)">cancel</mat-icon>
+        </mat-chip>
+    </mat-chip-list>
+</div>

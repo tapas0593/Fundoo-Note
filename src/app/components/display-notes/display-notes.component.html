@@ -1,7 +1,7 @@
 <div>
     <div fxLayout="{{direction}} wrap" fxLayoutAlign=" center" class="side"
         [ngClass]="direction === 'row' ? 'row-content': 'column-content'">
-        <div *ngFor="let note of notes" style="align-self: center;">
+        <div *ngFor="let note of notes">
             <mat-card class="matcard1" [ngClass]="direction === 'row' ? 'grid-mat-card': 'list-mat-card'"
                 [ngStyle]="{'background-color': note.color}">
                 <div (click)="onUpdate(note)">
@@ -15,6 +15,14 @@
                             cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMaxRows="5" disabled>{{note.description}}
                                 </textarea>
                     </div>
+                </div>
+                <div *ngIf="note.reminder!=null" class="chip-list">
+                    <mat-chip-list>
+                        <mat-chip class=chip>
+                            {{note.reminder}}
+                            <mat-icon matChipRemove (click)="onRemoveReminder(note)">cancel</mat-icon>
+                        </mat-chip>
+                    </mat-chip-list>
                 </div>
                 <div class="icon-toolbar">
                     <div>

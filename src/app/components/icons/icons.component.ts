@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NoteService } from 'src/app/service/note.service';
 import { MatSnackBar } from '@angular/material';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-icons',
@@ -8,6 +9,8 @@ import { MatSnackBar } from '@angular/material';
   styleUrls: ['./icons.component.scss']
 })
 export class IconsComponent implements OnInit {
+
+  now = new Date();
 
   @Input() noteInfo: any;
   constructor(private noteService: NoteService, private snackBar: MatSnackBar) { }
@@ -65,6 +68,57 @@ export class IconsComponent implements OnInit {
   addReminder() {
 
   }
+
+  
+  onToday() {
+    console.log(this.now);
+    let date: any;
+    date = formatDate(this.now, 'yyyy-MM-ddT20:00:00', 'en-IND', '+5:30');
+    console.log(date);
+    this.noteService.addReminder(this.noteInfo.noteId, date)
+      .subscribe((response: any) => {
+        if (response.statusCode === 200) {
+          this.snackBar.open(response.statusMessage, 'Undo', { duration: 2500 });
+          // this.noteInfo = response.body;
+        } else {
+          this.snackBar.open(response.statusMessage, 'Undo', { duration: 2500 });
+        }
+        console.log(response);
+      });
+  }
+  onTomorrow() {
+    let date: any;
+    date = formatDate(this.now.setDate(this.now.getDate() + 1), 'yyyy-MM-ddT20:00:00', 'en-IND', '+5:30');
+    console.log(this.now.getDate() + 1);
+    console.log(date);
+    this.noteService.addReminder(this.noteInfo.noteId, date)
+    .subscribe((response: any) => {
+      if (response.statusCode === 200) {
+        this.snackBar.open(response.statusMessage, 'Undo', { duration: 2500 });
+        // this.noteInfo = response.body;
+      } else {
+        this.snackBar.open(response.statusMessage, 'Undo', { duration: 2500 });
+      }
+      console.log(response);
+    });
+  }
+  onWeek() {
+    let date: any;
+    date = formatDate(this.now.setDate(this.now.getDate() + 7), 'yyyy-MM-ddT20:00:00', 'en-IND', '+5:30');
+    console.log(this.now.getDate() + 7);
+    console.log(date);
+    this.noteService.addReminder(this.noteInfo.noteId, date)
+    .subscribe((response: any) => {
+      if (response.statusCode === 200) {
+        this.snackBar.open(response.statusMessage, 'Undo', { duration: 2500 });
+        // this.noteInfo = response.body;
+      } else {
+        this.snackBar.open(response.statusMessage, 'Undo', { duration: 2500 });
+      }
+      console.log(response);
+    });
+  }
+
   addCollab() {
 
   }
@@ -119,13 +173,5 @@ export class IconsComponent implements OnInit {
   onLabel() {
 
   }
-  onToday() {
 
-  }
-  onTomorrow() {
-
-  }
-  onWeek() {
-
-  }
 }
