@@ -19,16 +19,19 @@ export class NoteService {
   public updateNote(note: any) {
     return this.http.put(this.url + 'update', note, httpOptions);
   }
+  public deleteNote(noteId: bigint) {
+    return this.http.delete(this.url + 'delete/' + noteId, httpOptions);
+  }
   public getArchivedNotes() {
     return this.http.get(this.url + 'getArchivedNote', httpOptions);
   }
   public getTrashedNotes() {
     return this.http.get(this.url + 'getTrashedNote', httpOptions);
   }
+  public getReminderNotes() {
+    return this.http.get(this.url + 'getReminderNotes', httpOptions);
+  }
   public addReminder(noteId: bigint, reminderDate: string) {
-    console.log(localStorage.getItem('token'));
-    console.log(httpOptions);
-    console.log(this.url + 'addReminder/' + noteId + '?reminderDate=' + reminderDate);
     return this.http.get(this.url + 'addReminder/' + noteId + '?reminderDate=' + reminderDate, httpOptions);
   }
   public removeReminder(noteId: bigint) {

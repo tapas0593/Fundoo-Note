@@ -18,8 +18,9 @@
                 </div>
                 <div *ngIf="note.reminder!=null" class="chip-list">
                     <mat-chip-list>
-                        <mat-chip class=chip>
-                            {{note.reminder}}
+                        <mat-chip [ngStyle]="{'background-color': note.color}">
+                            <mat-icon class="time-icon">access_times</mat-icon>
+                            {{note.reminder | date:'EEE MMM d, y, h:mm a'}}
                             <mat-icon matChipRemove (click)="onRemoveReminder(note)">cancel</mat-icon>
                         </mat-chip>
                     </mat-chip-list>

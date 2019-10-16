@@ -69,7 +69,6 @@ export class IconsComponent implements OnInit {
 
   }
 
-  
   onToday() {
     console.log(this.now);
     let date: any;
@@ -92,15 +91,15 @@ export class IconsComponent implements OnInit {
     console.log(this.now.getDate() + 1);
     console.log(date);
     this.noteService.addReminder(this.noteInfo.noteId, date)
-    .subscribe((response: any) => {
-      if (response.statusCode === 200) {
-        this.snackBar.open(response.statusMessage, 'Undo', { duration: 2500 });
-        // this.noteInfo = response.body;
-      } else {
-        this.snackBar.open(response.statusMessage, 'Undo', { duration: 2500 });
-      }
-      console.log(response);
-    });
+      .subscribe((response: any) => {
+        if (response.statusCode === 200) {
+          this.snackBar.open(response.statusMessage, 'Undo', { duration: 2500 });
+          // this.noteInfo = response.body;
+        } else {
+          this.snackBar.open(response.statusMessage, 'Undo', { duration: 2500 });
+        }
+        console.log(response);
+      });
   }
   onWeek() {
     let date: any;
@@ -108,15 +107,15 @@ export class IconsComponent implements OnInit {
     console.log(this.now.getDate() + 7);
     console.log(date);
     this.noteService.addReminder(this.noteInfo.noteId, date)
-    .subscribe((response: any) => {
-      if (response.statusCode === 200) {
-        this.snackBar.open(response.statusMessage, 'Undo', { duration: 2500 });
-        // this.noteInfo = response.body;
-      } else {
-        this.snackBar.open(response.statusMessage, 'Undo', { duration: 2500 });
-      }
-      console.log(response);
-    });
+      .subscribe((response: any) => {
+        if (response.statusCode === 200) {
+          this.snackBar.open(response.statusMessage, 'Undo', { duration: 2500 });
+          // this.noteInfo = response.body;
+        } else {
+          this.snackBar.open(response.statusMessage, 'Undo', { duration: 2500 });
+        }
+        console.log(response);
+      });
   }
 
   addCollab() {
@@ -130,7 +129,7 @@ export class IconsComponent implements OnInit {
   }
   archive() {
     console.log('notes before archived: ' + this.noteInfo.archived);
-    this.noteInfo.archived = true;
+    this.noteInfo.archived = !this.noteInfo.archived;
     this.noteService.updateNote(this.noteInfo)
       .subscribe((response: any) => {
         if (response.statusCode === 200) {
@@ -138,10 +137,12 @@ export class IconsComponent implements OnInit {
         } else {
           console.log(response);
         }
-        this.snackBar.open('Note was Archived.', 'Undo', { duration: 2500 })
+        const statusMessage = this.noteInfo.archived ? 'Note was Archived.' : 'Note was Unarchived.';
+        this.snackBar.open(statusMessage, 'Undo', { duration: 2500 })
       });
     console.log('notes after archived: ' + this.noteInfo.archived);
   }
+
   moreVert() {
 
   }
@@ -163,7 +164,6 @@ export class IconsComponent implements OnInit {
       .subscribe((response: any) => {
         if (response.statusCode === 200) {
           console.log(response);
-
         } else {
           console.log(response);
         }

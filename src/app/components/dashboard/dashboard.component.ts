@@ -34,7 +34,7 @@ export class DashboardComponent implements OnInit {
     this.isGrid = !this.isGrid;
     this.viewService.changeView();
     console.log(this.isGrid);
-    return this.isGrid;
+    // return this.isGrid;
   }
 
   getLabels() {
@@ -57,12 +57,16 @@ export class DashboardComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(() => {
       console.log('The dialog was closed');
+      this.getLabels();
     });
   }
+  onReminder() {
+    this.router.navigateByUrl('dashboard/reminder');
+  }
   onArchive() {
-    this.router.navigateByUrl('dashboard/archive')
+    this.router.navigateByUrl('dashboard/archive');
   }
   onTrash() {
-    this.router.navigateByUrl('dashboard/trash')
+    this.router.navigateByUrl('dashboard/trash');
   }
 }

@@ -10,9 +10,8 @@ import { ViewService } from 'src/app/service/view.service';
   styleUrls: ['./notes.component.scss']
 })
 export class NotesComponent implements OnInit {
-  direction = 'row';
   notes = [];
-  constructor(private noteService: NoteService, private viewService: ViewService, public dialog: MatDialog) { }
+  constructor(private noteService: NoteService) { }
 
   ngOnInit() {
     this.getAllNotes();

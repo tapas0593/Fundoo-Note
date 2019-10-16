@@ -68,4 +68,16 @@ mat-card:hover {
 
 .chip-list {
   width: 100%;
+  padding: 5px 10px;
+}
+
+.mat-standard-chip.mat-chip-with-trailing-icon {
+  padding: 3px 5px;
+  font-size: 12px;
+}
+:host .time-icon {
+  width: 18px;
+  height: 18px;
+  font-size: 18px;
+  margin-right: 8px;
 }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NoteService } from 'src/app/service/note.service';
+import { ViewService } from 'src/app/service/view.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-trash',
@@ -8,12 +10,42 @@ import { NoteService } from 'src/app/service/note.service';
 })
 export class TrashComponent implements OnInit {
   trashNotes: any;
-  constructor(private noteService: NoteService) { }
+  direction = 'row';
+  constructor(private noteService: NoteService, private viewService: ViewService, private snackBar: MatSnackBar) { 
+    this.viewService.currentView.subscribe(
+      response =>
+        this.change(response)
+    );
+  }
+
+  change(flag: boolean) {
+    if (flag) {
+      this.direction = 'column';
+    } else {
+      this.direction = 'row';
+    }
+  }
 
   ngOnInit() {
     this.noteService.getTrashedNotes()
       .subscribe((response: any) => {
         this.trashNotes = response.body;
+      });
+  }
+  onRestore(note: any) {
+    note.trash = false;
+    this.noteService.updateNote(note)
+      .subscribe((response: any) => {
+        console.log(response);
+        this.snackBar.open('Note successfully restored', 'Undo', { duration: 2500 });
+      });
+  }
+
+  onDelete(note: any) {
+    this.noteService.deleteNote(note.noteId)
+      .subscribe((response: any) => {
+        console.log(response);
+        this.snackBar.open('Note successfully Deleted', 'Undo', { duration: 2500 });
       });
   }
 }

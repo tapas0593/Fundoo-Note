@@ -13,7 +13,7 @@
                     <mat-icon class="labelIcon">check</mat-icon>
                 </button>
             </div>
-            <div fxLayout=column fxLayoutAlign="center center">
+            <div fxLayout=column>
                 <div *ngFor="let label of labels" fxLayout="row" class="contents">
                     <button mat-icon-button (click)="deleteLabel(label.labelId)">
                         <mat-icon class="labelIcon">delete</mat-icon>

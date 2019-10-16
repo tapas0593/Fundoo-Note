@@ -16,15 +16,21 @@ export class DisplayNotesComponent implements OnInit {
   constructor(private noteService: NoteService,
               private viewService: ViewService,
               public dialog: MatDialog,
-              private snackBar: MatSnackBar) { }
+              private snackBar: MatSnackBar) {
+    this.viewService.currentView.subscribe(
+      response =>
+        this.change(response)
+    );
+  }
 
+  change(flag: boolean) {
+    if (flag) {
+      this.direction = 'column';
+    } else {
+      this.direction = 'row';
+    }
+  }
   ngOnInit() {
-    this.viewService.getView().subscribe(
-      (result: any) => {
-        console.log('result:' + result);
-        this.direction = result.data;
-        console.log('direction: ' + this.direction);
-      });
   }
 
   onUpdate(note: any): void {

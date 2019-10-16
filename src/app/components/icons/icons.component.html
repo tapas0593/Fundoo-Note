@@ -11,9 +11,10 @@
     <button mat-icon-button (click)="addPhoto()">
         <mat-icon class=color><img src="assets/icons/image-24px.svg"></mat-icon>
     </button>
-    <button mat-icon-button (click)="archive()">
-        <mat-icon class=color><img src="assets/icons/archive-24px.svg"></mat-icon>
-    </button>
+        <button mat-icon-button (click)="archive()">
+            <mat-icon class=color *ngIf="!noteInfo.archived"><img src="assets/icons/archive-24px.svg"></mat-icon>
+            <mat-icon class=color *ngIf="noteInfo.archived"><img src="assets/icons/unarchive-24px.svg"></mat-icon>
+        </button>
     <button mat-icon-button (click)="moreVert()" [matMenuTriggerFor]="menu_more">
         <mat-icon class=color>more_vert</mat-icon>
     </button>
@@ -33,24 +34,24 @@
 
 <mat-menu #menu_more="matMenu">
     <div class=button>
-        <button mat-icon-button (click)="onDelete()">Delete note</button>
+        <button mat-menu-item (click)="onDelete()">Delete note</button>
     </div>
     <div class=button>
-        <button mat-icon-button (click)="onLabel()">Add Label</button>
+        <button mat-menu-item (click)="onLabel()">Add Label</button>
     </div>
 </mat-menu>
 
-<mat-menu #menu_reminder="matMenu">
-    <span style="margin-left: 10px">Reminder:</span>
+<mat-menu #menu_reminder="matMenu" style="width: 280px;">
+    <div style="padding: 15px;"><span>Reminder:</span></div>
     <div class="reminder">
         <div>
-            <button mat-icon-button (click)="onToday()">Today</button>
+            <button mat-menu-item (click)="onToday()">Today</button>
         </div>
         <div>
-            <button mat-icon-button (click)="onTomorrow()">Tomorrow</button>
+            <button mat-menu-item (click)="onTomorrow()">Tomorrow</button>
         </div>
         <div>
-            <button mat-icon-button (click)="onWeek()">Next Week</button>
+            <button mat-menu-item (click)="onWeek()">Next Week</button>
         </div>
     </div>
 </mat-menu>

@@ -1,26 +1,22 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ViewService {
+  private view = new BehaviorSubject(false);
+  currentView = this.view.asObservable();
 
-  isGrid = true;
-  subject = new Subject();
-  constructor() { }
+  private newView: boolean;
 
-  getView() {
-    this.changeView();
-    return this.subject.asObservable();
+  constructor() {
   }
-  changeView() {
-    if (this.isGrid) {
-      this.subject.next({ data: 'row' });
-    } else {
-      this.subject.next({ data: 'column' });
-    }
-    this.isGrid = !this.isGrid;
 
+  changeView() {
+    this.currentView.subscribe(
+      response => this.newView = response
+    );
+    this.view.next(!this.newView);
   }
 }
