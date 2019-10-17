@@ -24,4 +24,7 @@ export class NotesComponent implements OnInit {
         this.notes = response.body;
       });
   }
+  receiveEvent(event) {
+    this.getAllNotes();
+  }
 }

@@ -30,8 +30,8 @@ export class LoginComponent implements OnInit {
     return this.userService.login(this.login)
       .subscribe(response => {
         console.log(response);
-
-        if (response.statusCode === 302) {
+        console.log('status code= ' + response.statusCode);
+        if (response.statusCode === 200) {
           console.log(response);
           localStorage.setItem('token', response.body.token);
           localStorage.setItem('email', response.body.emailId);

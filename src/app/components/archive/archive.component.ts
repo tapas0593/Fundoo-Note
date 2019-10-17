@@ -13,10 +13,16 @@ export class ArchiveComponent implements OnInit {
   constructor(private noteService: NoteService) { }
 
   ngOnInit() {
+    this.getArchivedNotes();
+  }
+  getArchivedNotes() {
     this.noteService.getArchivedNotes()
       .subscribe((response: any) => {
         console.log(response);
         this.archivedNotes = response.body;
       });
+  }
+  receiveEvent(event) {
+    this.getArchivedNotes();
   }
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
+import { HttpClient } from '@angular/common/http';
 import { User } from '../model/user.model';
 import { Login } from '../model/login.model';
 import { ResetPassword } from '../model/resetpassword.model';

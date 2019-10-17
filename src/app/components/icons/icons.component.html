@@ -45,13 +45,13 @@
     <div style="padding: 15px;"><span>Reminder:</span></div>
     <div class="reminder">
         <div>
-            <button mat-menu-item (click)="onToday()">Today</button>
+            <button mat-menu-item (click)="setReminder('today')">Today</button>
         </div>
         <div>
-            <button mat-menu-item (click)="onTomorrow()">Tomorrow</button>
+            <button mat-menu-item (click)="setReminder('tomorrow')">Tomorrow</button>
         </div>
         <div>
-            <button mat-menu-item (click)="onWeek()">Next Week</button>
+            <button mat-menu-item (click)="setReminder('week')">Next Week</button>
         </div>
     </div>
 </mat-menu>

@@ -21,13 +21,25 @@
                         <mat-chip [ngStyle]="{'background-color': note.color}">
                             <mat-icon class="time-icon">access_times</mat-icon>
                             {{note.reminder | date:'EEE MMM d, y, h:mm a'}}
-                            <mat-icon matChipRemove (click)="onRemoveReminder(note)">cancel</mat-icon>
+                            <mat-icon matChipRemove (click)="onRemoveReminder(note)">close</mat-icon>
                         </mat-chip>
+                    </mat-chip-list>
+                </div>
+                <div fxLayout="row wrap">
+                    <mat-chip-list #chipList>
+                        <div *ngFor="let label of note.labels">
+                            <mat-chip class="noteLabels" routerLink="../labels/{{label.labelName}}">
+                                {{label.labelValue}}
+                                <button mat-icon-button class="cancleIcon">
+                                    <mat-icon matChipRemove (click)="removeLabel(label.labelId, note.noteId)">close</mat-icon>
+                                </button>
+                            </mat-chip>
+                        </div>
                     </mat-chip-list>
                 </div>
                 <div class="icon-toolbar">
                     <div>
-                        <app-icons [noteInfo]=note></app-icons>
+                        <app-icons [noteInfo]=note (updatedEvent)="note = $event"></app-icons>
                     </div>
                 </div>
             </mat-card>

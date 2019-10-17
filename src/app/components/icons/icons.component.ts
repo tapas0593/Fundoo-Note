@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NoteService } from 'src/app/service/note.service';
 import { MatSnackBar } from '@angular/material';
 import { formatDate } from '@angular/common';
@@ -13,6 +13,9 @@ export class IconsComponent implements OnInit {
   now = new Date();
 
   @Input() noteInfo: any;
+  @Output() updatedEvent = new EventEmitter<any>();
+  // @Output() updatedArchiveEvent = new EventEmitter<any>();
+
   constructor(private noteService: NoteService, private snackBar: MatSnackBar) { }
 
   colorPalet = [
@@ -68,54 +71,30 @@ export class IconsComponent implements OnInit {
   addReminder() {
 
   }
+  setReminder(message: string) {
+    let tempDate: any;
+    let date: any;
+    if (message === 'today') {
+      tempDate = this.now;
+    } else if (message === 'tomorrow') {
+      tempDate = this.now.setDate(this.now.getDate() + 1);
+    } else if (message === 'week') {
+      this.now.setDate(this.now.getDate() + 7);
+    }
 
-  onToday() {
-    console.log(this.now);
-    let date: any;
-    date = formatDate(this.now, 'yyyy-MM-ddT20:00:00', 'en-IND', '+5:30');
-    console.log(date);
+    date = formatDate(tempDate, 'yyyy-MM-ddT20:00:00', 'en-IND', '+5:30');
     this.noteService.addReminder(this.noteInfo.noteId, date)
       .subscribe((response: any) => {
         if (response.statusCode === 200) {
           this.snackBar.open(response.statusMessage, 'Undo', { duration: 2500 });
-          // this.noteInfo = response.body;
+          this.noteInfo = response.body;
+          this.updatedEvent.emit(this.noteInfo);
         } else {
           this.snackBar.open(response.statusMessage, 'Undo', { duration: 2500 });
         }
         console.log(response);
       });
-  }
-  onTomorrow() {
-    let date: any;
-    date = formatDate(this.now.setDate(this.now.getDate() + 1), 'yyyy-MM-ddT20:00:00', 'en-IND', '+5:30');
-    console.log(this.now.getDate() + 1);
-    console.log(date);
-    this.noteService.addReminder(this.noteInfo.noteId, date)
-      .subscribe((response: any) => {
-        if (response.statusCode === 200) {
-          this.snackBar.open(response.statusMessage, 'Undo', { duration: 2500 });
-          // this.noteInfo = response.body;
-        } else {
-          this.snackBar.open(response.statusMessage, 'Undo', { duration: 2500 });
-        }
-        console.log(response);
-      });
-  }
-  onWeek() {
-    let date: any;
-    date = formatDate(this.now.setDate(this.now.getDate() + 7), 'yyyy-MM-ddT20:00:00', 'en-IND', '+5:30');
-    console.log(this.now.getDate() + 7);
-    console.log(date);
-    this.noteService.addReminder(this.noteInfo.noteId, date)
-      .subscribe((response: any) => {
-        if (response.statusCode === 200) {
-          this.snackBar.open(response.statusMessage, 'Undo', { duration: 2500 });
-          // this.noteInfo = response.body;
-        } else {
-          this.snackBar.open(response.statusMessage, 'Undo', { duration: 2500 });
-        }
-        console.log(response);
-      });
+
   }
 
   addCollab() {
@@ -134,11 +113,14 @@ export class IconsComponent implements OnInit {
       .subscribe((response: any) => {
         if (response.statusCode === 200) {
           console.log(response);
+          this.noteInfo = response.body;
+          // console.log('event sent: ' + this.noteInfo);
+          // this.updatedArchiveEvent.emit(this.noteInfo);
         } else {
           console.log(response);
         }
         const statusMessage = this.noteInfo.archived ? 'Note was Archived.' : 'Note was Unarchived.';
-        this.snackBar.open(statusMessage, 'Undo', { duration: 2500 })
+        this.snackBar.open(statusMessage, 'Undo', { duration: 2500 });
       });
     console.log('notes after archived: ' + this.noteInfo.archived);
   }
@@ -167,7 +149,7 @@ export class IconsComponent implements OnInit {
         } else {
           console.log(response);
         }
-        this.snackBar.open('Note was Deleted.', 'Undo', { duration: 2500 })
+        this.snackBar.open('Note was Deleted.', 'Undo', { duration: 2500 });
       });
   }
   onLabel() {

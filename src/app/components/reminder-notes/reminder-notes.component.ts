@@ -22,4 +22,7 @@ export class ReminderNotesComponent implements OnInit {
         this.notes = response.body;
       });
   }
+  receiveEvent(event) {
+    this.getReminderNotes();
+  }
 }

@@ -9,13 +9,14 @@ import { MatSnackBar } from '@angular/material';
   styleUrls: ['./trash.component.scss']
 })
 export class TrashComponent implements OnInit {
-  trashNotes: any;
+  trashNotes: [];
   direction = 'row';
-  constructor(private noteService: NoteService, private viewService: ViewService, private snackBar: MatSnackBar) { 
+  constructor(private noteService: NoteService, private viewService: ViewService, private snackBar: MatSnackBar) {
     this.viewService.currentView.subscribe(
       response =>
         this.change(response)
     );
+    this.getTrashedNotes();
   }
 
   change(flag: boolean) {
@@ -27,6 +28,8 @@ export class TrashComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+  getTrashedNotes() {
     this.noteService.getTrashedNotes()
       .subscribe((response: any) => {
         this.trashNotes = response.body;
@@ -37,14 +40,16 @@ export class TrashComponent implements OnInit {
     this.noteService.updateNote(note)
       .subscribe((response: any) => {
         console.log(response);
+        this.getTrashedNotes();
         this.snackBar.open('Note successfully restored', 'Undo', { duration: 2500 });
       });
   }
 
-  onDelete(note: any) {
+  onDelete(note: any, tempId: any) {
     this.noteService.deleteNote(note.noteId)
       .subscribe((response: any) => {
         console.log(response);
+        this.trashNotes.splice(tempId, 1);
         this.snackBar.open('Note successfully Deleted', 'Undo', { duration: 2500 });
       });
   }

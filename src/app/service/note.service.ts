@@ -7,6 +7,7 @@ const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/js
   providedIn: 'root'
 })
 export class NoteService {
+
   private url = 'http://localhost:8080/fundoo/note/';
   constructor(private http: HttpClient) { }
 
@@ -36,5 +37,8 @@ export class NoteService {
   }
   public removeReminder(noteId: bigint) {
     return this.http.get(this.url + 'removeReminder/' + noteId, httpOptions);
+  }
+  public addLabelToNote(labelId: bigint, noteId: bigint) {
+    return this.http.post(this.url + 'addlabel?noteId=' + noteId + '&labelId=' + labelId, httpOptions);
   }
 }

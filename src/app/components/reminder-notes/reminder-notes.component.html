@@ -1,2 +1,2 @@
 <app-addnote></app-addnote>
-<app-display-notes [notes]="notes"></app-display-notes>
+<app-display-notes [notes]="notes" (updatedEvent)="receiveEvent($event)"></app-display-notes>

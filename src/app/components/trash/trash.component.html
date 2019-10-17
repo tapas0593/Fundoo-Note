@@ -2,10 +2,10 @@
 <div>
     <div fxLayout="{{direction}} wrap" fxLayoutAlign=" center" class="side"
         [ngClass]="direction === 'row' ? 'row-content': 'column-content'">
-        <div *ngFor="let note of trashNotes">
+        <div *ngFor="let note of trashNotes; let tempId = index;">
             <mat-card class="matcard1" [ngClass]="direction === 'row' ? 'grid-mat-card': 'list-mat-card'"
                 [ngStyle]="{'background-color': note.color}">
-                <div (click)="onUpdate(note)">
+                <div>
                     <div class="title">
                         <textarea class="text title-font" [ngStyle]="{'background-color': note.color}" matInput
                             cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMaxRows="5" disabled>{{note.title}}
@@ -29,7 +29,7 @@
                         <button  mat-menu-item (click)="onDelete(note)">Delete Forever</button>
                     </div>
                     <div>
-                        <button mat-menu-item (click)="onRestore(note)">Restore</button>
+                        <button mat-menu-item (click)="onRestore(note, tempId)">Restore</button>
                     </div>
                 </div>
             </mat-menu>
