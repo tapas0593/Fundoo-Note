@@ -15,6 +15,7 @@ export class IconsComponent implements OnInit {
   @Input() noteInfo: any;
   @Output() updatedEvent = new EventEmitter<any>();
   // @Output() updatedArchiveEvent = new EventEmitter<any>();
+  @Input() allLabels: any;
 
   constructor(private noteService: NoteService, private snackBar: MatSnackBar) { }
 
@@ -156,4 +157,13 @@ export class IconsComponent implements OnInit {
 
   }
 
+  addLabelToNote($event, labelId) {
+    console.log($event.checked);
+    if ($event.checked) {
+      this.noteService.addLabelToNote(labelId, this.noteInfo.noteId)
+        .subscribe((response: any) => {
+          console.log(response);
+        });
+    }
+  }
 }

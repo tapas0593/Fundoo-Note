@@ -39,6 +39,6 @@ export class NoteService {
     return this.http.get(this.url + 'removeReminder/' + noteId, httpOptions);
   }
   public addLabelToNote(labelId: bigint, noteId: bigint) {
-    return this.http.post(this.url + 'addlabel?noteId=' + noteId + '&labelId=' + labelId, httpOptions);
+    return this.http.get(this.url + 'addlabel?noteId=' + noteId + '&labelId=' + labelId, httpOptions);
   }
 }

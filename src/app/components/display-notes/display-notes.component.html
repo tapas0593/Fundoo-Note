@@ -25,21 +25,21 @@
                         </mat-chip>
                     </mat-chip-list>
                 </div>
-                <div fxLayout="row wrap">
+                <div fxLayout="row wrap" class="chip-list">
                     <mat-chip-list #chipList>
                         <div *ngFor="let label of note.labels">
-                            <mat-chip class="noteLabels" routerLink="../labels/{{label.labelName}}">
-                                {{label.labelValue}}
-                                <button mat-icon-button class="cancleIcon">
-                                    <mat-icon matChipRemove (click)="removeLabel(label.labelId, note.noteId)">close</mat-icon>
-                                </button>
+                            <mat-chip [ngStyle]="{'background-color': note.color}"
+                                routerLink="labels/{{label.labelName}}">
+                                {{label.labelName}}
+                                <mat-icon matChipRemove (click)="removeLabel(label.labelId, note.noteId)">close
+                                </mat-icon>
                             </mat-chip>
                         </div>
                     </mat-chip-list>
                 </div>
                 <div class="icon-toolbar">
                     <div>
-                        <app-icons [noteInfo]=note (updatedEvent)="note = $event"></app-icons>
+                        <app-icons [noteInfo]=note (updatedEvent)="note = $event" [allLabels]=labels></app-icons>
                     </div>
                 </div>
             </mat-card>

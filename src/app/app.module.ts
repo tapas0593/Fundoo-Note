@@ -27,6 +27,7 @@ import { EditLabelComponent } from './components/edit-label/edit-label.component
 import { IconsComponent } from './components/icons/icons.component';
 import { DisplayNotesComponent } from './components/display-notes/display-notes.component';
 import { ReminderNotesComponent } from './components/reminder-notes/reminder-notes.component';
+import { LabeledNoteComponent } from './components/labeled-note/labeled-note.component';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { ReminderNotesComponent } from './components/reminder-notes/reminder-not
     EditLabelComponent,
     IconsComponent,
     DisplayNotesComponent,
-    ReminderNotesComponent
+    ReminderNotesComponent,
+    LabeledNoteComponent
   ],
   imports: [
     BrowserModule,
