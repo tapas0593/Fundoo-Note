@@ -2,6 +2,9 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NoteService } from 'src/app/service/note.service';
 import { MatSnackBar } from '@angular/material';
 import { formatDate } from '@angular/common';
+import { FormGroup, FormControl } from '@angular/forms';
+import { LabelService } from 'src/app/service/label.service';
+import { FORMERR } from 'dns';
 
 @Component({
   selector: 'app-icons',
@@ -10,14 +13,23 @@ import { formatDate } from '@angular/common';
 })
 export class IconsComponent implements OnInit {
 
-  now = new Date();
+  formGroup: FormGroup;
 
+  now = new Date();
+  private show = false;
+  searchLabelName: string;
   @Input() noteInfo: any;
   @Output() updatedEvent = new EventEmitter<any>();
   // @Output() updatedArchiveEvent = new EventEmitter<any>();
-  @Input() allLabels: any;
 
-  constructor(private noteService: NoteService, private snackBar: MatSnackBar) { }
+  // @Input() labels: any;
+  labels: any;
+  // @Input()
+  // set labels(labels) {
+  //   this.labels1 = labels;
+  // }
+
+  constructor(private noteService: NoteService, private snackBar: MatSnackBar, private labelService: LabelService) { }
 
   colorPalet = [
     [
@@ -66,9 +78,19 @@ export class IconsComponent implements OnInit {
   ];
 
   ngOnInit() {
-    console.log('notes color: ' + this.noteInfo.color);
+    this.formGroup = new FormGroup(
+      {
+        labelName: new FormControl('')
+      }
+    );
+    this.getLabels();
   }
 
+  getLabels() {
+    this.labelService.getLabels().subscribe(
+      (response: any) => this.labels = response.body
+    );
+  }
   addReminder() {
 
   }
@@ -80,7 +102,7 @@ export class IconsComponent implements OnInit {
     } else if (message === 'tomorrow') {
       tempDate = this.now.setDate(this.now.getDate() + 1);
     } else if (message === 'week') {
-      this.now.setDate(this.now.getDate() + 7);
+      tempDate = this.now.setDate(this.now.getDate() + 7);
     }
 
     date = formatDate(tempDate, 'yyyy-MM-ddT20:00:00', 'en-IND', '+5:30');
@@ -157,13 +179,48 @@ export class IconsComponent implements OnInit {
 
   }
 
-  addLabelToNote($event, labelId) {
-    console.log($event.checked);
-    if ($event.checked) {
+  addLabelToNote(isChecked: boolean, labelId: any) {
+    console.log(isChecked);
+    if (isChecked) {
       this.noteService.addLabelToNote(labelId, this.noteInfo.noteId)
         .subscribe((response: any) => {
           console.log(response);
+          this.snackBar.open(response.statusMessage, 'Undo', { duration: 2500 });
         });
+    } else {
+      this.removeLabelFromNote(labelId, this.noteInfo.noteId);
     }
+  }
+
+  removeLabelFromNote(labelId: bigint, noteId: bigint) {
+    this.noteService.removeLabelFromNote(labelId, noteId)
+      .subscribe((response: any) => {
+        console.log(response);
+        if (response.statusCode === 200) {
+          this.snackBar.open(response.statusMessage, 'Undo', { duration: 2500 });
+        }
+      });
+  }
+  onSearchChange(searchValue: string) {
+    if (searchValue !== '') {
+      this.show = true;
+      this.labels = this.labels.filter(label => label.labelName.toLowerCase().indexOf(searchValue.toLowerCase()) > -1);
+      this.searchLabelName = searchValue;
+    } else {
+      this.show = false;
+      this.getLabels();
+    }
+  }
+
+  createNewLabel($event) {
+    this.labelService.createLabel(this.formGroup.value)
+      .subscribe((response: any) => {
+        if (response.statusCode === 201) {
+          console.log(response);
+          // this.snackBar.open(response.statusMessage, '', { duration: 2500 });
+          this.addLabelToNote(true, response.body.labelId);
+          this.getLabels();
+        }
+      });
   }
 }

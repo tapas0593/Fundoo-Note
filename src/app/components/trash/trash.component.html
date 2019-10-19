@@ -26,10 +26,10 @@
             <mat-menu #menu_delete="matMenu" style="width: 280px;">
                 <div>
                     <div>
-                        <button  mat-menu-item (click)="onDelete(note)">Delete Forever</button>
+                        <button  mat-menu-item (click)="onDelete(note, tempId)">Delete Forever</button>
                     </div>
                     <div>
-                        <button mat-menu-item (click)="onRestore(note, tempId)">Restore</button>
+                        <button mat-menu-item (click)="onRestore(note)">Restore</button>
                     </div>
                 </div>
             </mat-menu>

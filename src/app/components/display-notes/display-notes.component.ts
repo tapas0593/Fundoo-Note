@@ -37,19 +37,22 @@ export class DisplayNotesComponent implements OnInit {
     }
   }
   ngOnInit() {
-    this.getLabels();
+    // this.getLabels();
   }
 
-  onUpdate(note: any): void {
+  onUpdate(note: any, tempId1: any): void {
     console.log('note-->', note);
     const dialogRef = this.dialog.open(UpdateNoteComponent, {
       width: '600px',
       height: 'auto',
-      data: note,
-      panelClass: 'custom-dialog-container'
+      data: { noteInfo: note, labels: this.labels },
+      disableClose: true,
+      panelClass: 'custom-dialog-container',
     });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+    dialogRef.afterClosed().subscribe(response => {
+      console.log('The dialog was closed. Result: ' + response);
+      // note = response;
+      this.notes.splice(tempId1, 1, response);
     });
   }
   onRemoveReminder(note: any) {
@@ -62,23 +65,16 @@ export class DisplayNotesComponent implements OnInit {
         }
       });
   }
-  getLabels() {
-    this.labelService.getLabels().subscribe(
-      (response: any) => this.labels = response.body
-    );
-  }
 
-  addLabelToNote(event, labelId: bigint, noteId: bigint) {
-    console.log('event data');
-    console.log(event);
-    this.noteService.addLabelToNote(labelId, noteId)
-      .subscribe(
-        (response: any) => {
-          this.getLabels();
-          // this.updateService.changeUpdate(false, false);
-          this.snackBar.open(response.statusMessage, '', { duration: 2500});
 
+  removeLabelFromNote(label: any, note: any, tempId: any) {
+    this.noteService.removeLabelFromNote(label.labelId, note.noteId)
+      .subscribe((response: any) => {
+        console.log(response);
+        if (response.statusCode === 200) {
+          note.labels.splice(tempId, 1);
+          this.snackBar.open(response.statusMessage, 'Undo', { duration: 2500 });
         }
-      );
+      });
   }
 }

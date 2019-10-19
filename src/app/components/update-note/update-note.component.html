@@ -13,12 +13,38 @@
                     [ngStyle]="{'background-color': note.color}"></textarea>
             </div>
 
+
+
+            <div *ngIf="note.reminder!=null" class="chip-list">
+                <mat-chip-list>
+                    <mat-chip [ngStyle]="{'background-color': note.color}">
+                        <mat-icon class="time-icon">access_times</mat-icon>
+                        {{note.reminder | date:'EEE MMM d, y, h:mm a'}}
+                        <mat-icon matChipRemove (click)="onRemoveReminder(note)">close</mat-icon>
+                    </mat-chip>
+                </mat-chip-list>
+            </div>
+            <div fxLayout="row wrap" class="chip-list">
+                <mat-chip-list #chipList>
+                    <div *ngFor="let label of note.labels; let tempId = index;">
+                        <mat-chip [ngStyle]="{'background-color': note.color}"
+                            routerLink="../labels/{{label.labelName}}">
+                            {{label.labelName}}
+                            <mat-icon matChipRemove (click)="removeLabelFromNote(label, note, tempId)">close
+                            </mat-icon>
+                        </mat-chip>
+                    </div>
+                </mat-chip-list>
+            </div>
+
+
+
             <div style="margin: 4px 4px 0;" flexLayout="row" fxLayoutAlign="space-between center">
                 <div class="appicons">
-                    <app-icons [noteInfo]=note></app-icons>
+                    <app-icons [noteInfo]=note (updatedEvent)="note = $event"></app-icons>
                 </div>
                 <div>
-                    <button class="close-button" type="button" mat-button (click)="onClose()">Close</button>
+                    <button class="close-button" type="button" mat-button [mat-dialog-close]="note" (click)="onClose()">Close</button>
                 </div>
             </div>
         </form>

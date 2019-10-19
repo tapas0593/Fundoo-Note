@@ -1,10 +1,10 @@
 <div>
     <div fxLayout="{{direction}} wrap" fxLayoutAlign=" center" class="side"
         [ngClass]="direction === 'row' ? 'row-content': 'column-content'">
-        <div *ngFor="let note of notes">
+        <div *ngFor="let note of notes; let tempId1 = index">
             <mat-card class="matcard1" [ngClass]="direction === 'row' ? 'grid-mat-card': 'list-mat-card'"
                 [ngStyle]="{'background-color': note.color}">
-                <div (click)="onUpdate(note)">
+                <div (click)="onUpdate(note, tempId1)">
                     <div class="title">
                         <textarea class="text title-font" [ngStyle]="{'background-color': note.color}" matInput
                             cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMaxRows="5" disabled>{{note.title}}
@@ -27,11 +27,11 @@
                 </div>
                 <div fxLayout="row wrap" class="chip-list">
                     <mat-chip-list #chipList>
-                        <div *ngFor="let label of note.labels">
+                        <div *ngFor="let label of note.labels; let tempId = index;">
                             <mat-chip [ngStyle]="{'background-color': note.color}"
-                                routerLink="labels/{{label.labelName}}">
+                                routerLink="../labels/{{label.labelName}}">
                                 {{label.labelName}}
-                                <mat-icon matChipRemove (click)="removeLabel(label.labelId, note.noteId)">close
+                                <mat-icon matChipRemove (click)="removeLabelFromNote(label, note, tempId)">close
                                 </mat-icon>
                             </mat-chip>
                         </div>
@@ -39,7 +39,7 @@
                 </div>
                 <div class="icon-toolbar">
                     <div>
-                        <app-icons [noteInfo]=note (updatedEvent)="note = $event" [allLabels]=labels></app-icons>
+                        <app-icons [noteInfo]="note" (updatedEvent)="note = $event"></app-icons>
                     </div>
                 </div>
             </mat-card>

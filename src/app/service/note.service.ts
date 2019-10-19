@@ -41,4 +41,7 @@ export class NoteService {
   public addLabelToNote(labelId: bigint, noteId: bigint) {
     return this.http.get(this.url + 'addlabel?noteId=' + noteId + '&labelId=' + labelId, httpOptions);
   }
+  public removeLabelFromNote(labelId: bigint, noteId: bigint) {
+    return this.http.delete(this.url + 'removeLabel?noteId=' + noteId + '&labelId=' + labelId, httpOptions);
+  }
 }

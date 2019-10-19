@@ -43,10 +43,10 @@ const routes: Routes = [
     path: 'dashboard',
     component: DashboardComponent, children: [
       {
-        path: '', component: NotesComponent
+        path: 'notes', component: NotesComponent
       },
       {
-        path: 'notes', redirectTo: '/dashboard', pathMatch: 'full'
+        path: '', redirectTo: 'notes', pathMatch: 'full'
       },
       {
         path: 'trash', component: TrashComponent

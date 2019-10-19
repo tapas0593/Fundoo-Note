@@ -33,3 +33,18 @@
   margin-right: 15px;
   line-height: 1.25rem;
 }
+.chip-list {
+  padding: 5px 10px;
+}
+
+.mat-standard-chip.mat-chip-with-trailing-icon {
+  padding: 3px 5px;
+  font-size: 12px;
+  min-height: 25px;
+}
+:host .time-icon {
+  width: 18px;
+  height: 18px;
+  font-size: 18px;
+  margin-right: 8px;
+}

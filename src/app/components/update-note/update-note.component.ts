@@ -10,13 +10,15 @@ import { NoteService } from 'src/app/service/note.service';
 })
 export class UpdateNoteComponent implements OnInit {
   note: {};
+  // labels: [];
   noteId = this.data.noteId;
   title = new FormControl(this.data.title);
   description = new FormControl(this.data.description);
   constructor(
     public dialogRef: MatDialogRef<UpdateNoteComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any, private noteService: NoteService, private snackbar: MatSnackBar) {
-    this.note = data;
+    @Inject(MAT_DIALOG_DATA) public data: any, private noteService: NoteService, private snackBar: MatSnackBar) {
+    this.note = data.noteInfo;
+    // this.labels = data.labels;
   }
 
   ngOnInit() {
@@ -28,12 +30,34 @@ export class UpdateNoteComponent implements OnInit {
       .subscribe((response: any) => {
         if (response.statusCode === 200) {
           console.log(response);
-          this.snackbar.open(response.statusMessage, 'Undo', { duration: 2500 });
+          this.snackBar.open(response.statusMessage, 'Undo', { duration: 2500 });
         } else {
           console.log(response);
-          this.snackbar.open('Note Updation Unsuccessful', 'Undo', { duration: 2500 });
+          this.snackBar.open('Note Updation Unsuccessful', 'Undo', { duration: 2500 });
         }
       });
-    this.dialogRef.close();
+    this.dialogRef.close(this.note);
+  }
+  onRemoveReminder(note: any) {
+    this.noteService.removeReminder(note.noteId)
+      .subscribe((response: any) => {
+        console.log(response.body);
+        // this.updatedEvent.emit(response.body);
+        if (response.statusCode === 200) {
+          this.note = response.body;
+          this.snackBar.open(response.statusMessage, 'Undo', { duration: 2500 });
+        }
+      });
+  }
+
+  removeLabelFromNote(label: any, note: any, tempId: any) {
+    this.noteService.removeLabelFromNote(label.labelId, note.noteId)
+      .subscribe((response: any) => {
+        console.log(response);
+        if (response.statusCode === 200) {
+          note.labels.splice(tempId, 1);
+          this.snackBar.open(response.statusMessage, 'Undo', { duration: 2500 });
+        }
+      });
   }
 }
