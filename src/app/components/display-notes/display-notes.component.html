@@ -29,7 +29,7 @@
                     <mat-chip-list #chipList>
                         <div *ngFor="let label of note.labels; let tempId = index;">
                             <mat-chip [ngStyle]="{'background-color': note.color}"
-                                routerLink="../labels/{{label.labelName}}">
+                                routerLink="../{{label.labelName}}">
                                 {{label.labelName}}
                                 <mat-icon matChipRemove (click)="removeLabelFromNote(label, note, tempId)">close
                                 </mat-icon>

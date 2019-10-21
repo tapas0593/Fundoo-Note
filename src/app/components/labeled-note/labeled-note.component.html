@@ -1,1 +1,2 @@
-<p>labeled-note works!</p>
+<app-addnote></app-addnote>
+<app-display-notes [notes]="notes" (updatedEvent)="receiveEvent($event)"></app-display-notes>

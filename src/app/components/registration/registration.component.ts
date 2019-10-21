@@ -28,7 +28,7 @@ export class RegistrationComponent {
       .subscribe(response => {
         if (response.statusCode === 200) {
           console.log(response);
-          this.router.navigateByUrl("/login");
+          this.router.navigateByUrl('/login');
         } else {
           console.log(response);
         }

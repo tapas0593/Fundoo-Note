@@ -58,7 +58,7 @@ const routes: Routes = [
         path: 'reminder', component: ReminderNotesComponent
       },
       {
-        path: 'labels/:labelName',
+        path: ':labelName',
         component: LabeledNoteComponent,
       }
     ]

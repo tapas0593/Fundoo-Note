@@ -20,7 +20,7 @@ export class VerifyUserComponent implements OnInit {
     .subscribe((response: any) => {
       if(response.statusCode === 200) {
         console.log(response);
-        this.router.navigateByUrl("/login");
+        this.router.navigateByUrl('/login');
       } else {
         console.log(response);
       }

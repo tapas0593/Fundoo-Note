@@ -94,7 +94,7 @@
                 </span>
                 <div *ngIf="labels ? labels.length>0: false">
                     <div *ngFor="let label of labels">
-                        <button mat-raised-button class="menuButton" routerLink="labels/{{label.labelName}}"
+                        <button mat-raised-button class="menuButton" routerLink="{{label.labelName}}"
                             routerLinkActive="active" [disableRipple]="true">
                             <mat-icon style="margin-right:40px;margin-left:10px">
                                 <img src="assets/icons/label-24px.svg">

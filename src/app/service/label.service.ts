@@ -25,4 +25,12 @@ export class LabelService {
   deleteLabel(labelId: bigint) {
     return this.http.delete(this.url + 'delete/' + labelId, httpOptions);
   }
+  getLabel(labelName: string) {
+    return this.http.get(this.url + 'getLabel?labelName=' + labelName, httpOptions);
+  }
+  getLabeledNotes(labelId: bigint) {
+    console.log('inside label Service ' + labelId);
+    
+    return this.http.get(this.url + 'getLabeledNotes?labelId=' + labelId, httpOptions);
+  }
 }
