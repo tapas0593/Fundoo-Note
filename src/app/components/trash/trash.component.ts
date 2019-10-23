@@ -30,7 +30,7 @@ export class TrashComponent implements OnInit {
   ngOnInit() {
   }
   getTrashedNotes() {
-    this.noteService.getTrashedNotes()
+    this.noteService.getAllNotes(true, false)
       .subscribe((response: any) => {
         this.trashNotes = response.body;
       });

@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NoteService } from 'src/app/service/note.service';
-import { MatDialog } from '@angular/material';
-import { UpdateNoteComponent } from '../update-note/update-note.component';
-import { ViewService } from 'src/app/service/view.service';
 
 @Component({
   selector: 'app-notes',
@@ -18,7 +15,7 @@ export class NotesComponent implements OnInit {
   }
 
   getAllNotes() {
-    this.noteService.getAllNotes()
+    this.noteService.getAllNotes(false, false)
       .subscribe((response: any) => {
         console.log(response);
         this.notes = response.body;

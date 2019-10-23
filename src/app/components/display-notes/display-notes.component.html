@@ -3,35 +3,35 @@
         [ngClass]="direction === 'row' ? 'row-content': 'column-content'">
         <div *ngFor="let note of notes; let tempId1 = index">
             <mat-card class="matcard1" [ngClass]="direction === 'row' ? 'grid-mat-card': 'list-mat-card'"
-                [ngStyle]="{'background-color': note.color}">
-                <div (click)="onUpdate(note, tempId1)">
+                [ngStyle]="{'background-color': note.note.color}">
+                <div (click)="onUpdate(note.note, tempId1)">
                     <div class="title">
-                        <textarea class="text title-font" [ngStyle]="{'background-color': note.color}" matInput
-                            cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMaxRows="5" disabled>{{note.title}}
+                        <textarea class="text title-font" [ngStyle]="{'background-color': note.note.color}" matInput
+                            cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMaxRows="5" disabled>{{note.note.title}}
                                 </textarea>
                     </div>
                     <div class="description">
-                        <textarea class="text description-font" [ngStyle]="{'background-color': note.color}" matInput
-                            cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMaxRows="5" disabled>{{note.description}}
+                        <textarea class="text description-font" [ngStyle]="{'background-color': note.note.color}" matInput
+                            cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMaxRows="5" disabled>{{note.note.description}}
                                 </textarea>
                     </div>
                 </div>
-                <div *ngIf="note.reminder!=null" class="chip-list">
+                <div *ngIf="note.note.reminder!=null" class="chip-list">
                     <mat-chip-list>
-                        <mat-chip [ngStyle]="{'background-color': note.color}">
+                        <mat-chip [ngStyle]="{'background-color': note.note.color}">
                             <mat-icon class="time-icon">access_times</mat-icon>
-                            {{note.reminder | date:'EEE MMM d, y, h:mm a'}}
-                            <mat-icon matChipRemove (click)="onRemoveReminder(note)">close</mat-icon>
+                            {{note.note.reminder | date:'EEE MMM d, y, h:mm a'}}
+                            <mat-icon matChipRemove (click)="onRemoveReminder(note.note)">close</mat-icon>
                         </mat-chip>
                     </mat-chip-list>
                 </div>
                 <div fxLayout="row wrap" class="chip-list">
                     <mat-chip-list #chipList>
-                        <div *ngFor="let label of note.labels; let tempId = index;">
-                            <mat-chip [ngStyle]="{'background-color': note.color}"
+                        <div *ngFor="let label of note.note.labels; let tempId = index;">
+                            <mat-chip [ngStyle]="{'background-color': note.note.color}"
                                 routerLink="../{{label.labelName}}">
                                 {{label.labelName}}
-                                <mat-icon matChipRemove (click)="removeLabelFromNote(label, note, tempId)">close
+                                <mat-icon matChipRemove (click)="removeLabelFromNote(label, note.note, tempId)">close
                                 </mat-icon>
                             </mat-chip>
                         </div>
@@ -39,7 +39,7 @@
                 </div>
                 <div class="icon-toolbar">
                     <div>
-                        <app-icons [noteInfo]="note" (updatedEvent)="note = $event"></app-icons>
+                        <app-icons [noteInfo]="note.note" (updatedEvent)="note.note = $event"></app-icons>
                     </div>
                 </div>
             </mat-card>

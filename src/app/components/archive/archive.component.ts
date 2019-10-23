@@ -16,7 +16,7 @@ export class ArchiveComponent implements OnInit {
     this.getArchivedNotes();
   }
   getArchivedNotes() {
-    this.noteService.getArchivedNotes()
+    this.noteService.getAllNotes(false, true)
       .subscribe((response: any) => {
         console.log(response);
         this.archivedNotes = response.body;

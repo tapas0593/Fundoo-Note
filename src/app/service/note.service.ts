@@ -14,8 +14,8 @@ export class NoteService {
   public createNote(note: any): any {
     return this.http.post(this.url + 'create', note, httpOptions);
   }
-  public getAllNotes() {
-    return this.http.get(this.url + 'getnotes', httpOptions);
+  public getAllNotes(isTrash: boolean, isArchived: boolean) {
+    return this.http.get(this.url + 'getnotes?isTrash=' + isTrash + '&isArchived=' + isArchived, httpOptions);
   }
   public updateNote(note: any) {
     return this.http.put(this.url + 'update', note, httpOptions);
