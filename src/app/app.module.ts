@@ -28,6 +28,7 @@ import { IconsComponent } from './components/icons/icons.component';
 import { DisplayNotesComponent } from './components/display-notes/display-notes.component';
 import { ReminderNotesComponent } from './components/reminder-notes/reminder-notes.component';
 import { LabeledNoteComponent } from './components/labeled-note/labeled-note.component';
+import { CollabDialogComponent } from './components/collab-dialog/collab-dialog.component';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { LabeledNoteComponent } from './components/labeled-note/labeled-note.com
     IconsComponent,
     DisplayNotesComponent,
     ReminderNotesComponent,
-    LabeledNoteComponent
+    LabeledNoteComponent,
+    CollabDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +62,7 @@ import { LabeledNoteComponent } from './components/labeled-note/labeled-note.com
     MaterialModule,
     HttpClientModule
   ],
-  entryComponents: [UpdateNoteComponent, EditLabelComponent],
+  entryComponents: [UpdateNoteComponent, EditLabelComponent, CollabDialogComponent],
   providers: [UserService, LabelService, NoteService, ViewService],
   bootstrap: [AppComponent]
 })

@@ -4,16 +4,16 @@
         [ngClass]="direction === 'row' ? 'row-content': 'column-content'">
         <div *ngFor="let note of trashNotes; let tempId = index;">
             <mat-card class="matcard1" [ngClass]="direction === 'row' ? 'grid-mat-card': 'list-mat-card'"
-                [ngStyle]="{'background-color': note.color}">
+                [ngStyle]="{'background-color': note.note.color}">
                 <div>
                     <div class="title">
-                        <textarea class="text title-font" [ngStyle]="{'background-color': note.color}" matInput
-                            cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMaxRows="5" disabled>{{note.title}}
+                        <textarea class="text title-font" [ngStyle]="{'background-color': note.note.color}" matInput
+                            cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMaxRows="5" disabled>{{note.note.title}}
                                 </textarea>
                     </div>
                     <div class="description">
-                        <textarea class="text description-font" [ngStyle]="{'background-color': note.color}" matInput
-                            cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMaxRows="5" disabled>{{note.description}}
+                        <textarea class="text description-font" [ngStyle]="{'background-color': note.note.color}" matInput
+                            cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMaxRows="5" disabled>{{note.note.description}}
                                 </textarea>
                     </div>
                 </div>
@@ -26,10 +26,10 @@
             <mat-menu #menu_delete="matMenu" style="width: 280px;">
                 <div>
                     <div>
-                        <button  mat-menu-item (click)="onDelete(note, tempId)">Delete Forever</button>
+                        <button  mat-menu-item (click)="onDelete(note.note, tempId)">Delete Forever</button>
                     </div>
                     <div>
-                        <button mat-menu-item (click)="onRestore(note)">Restore</button>
+                        <button mat-menu-item (click)="onRestore(note.note)">Restore</button>
                     </div>
                 </div>
             </mat-menu>

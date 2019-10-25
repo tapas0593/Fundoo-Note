@@ -11,8 +11,9 @@
                                 </textarea>
                     </div>
                     <div class="description">
-                        <textarea class="text description-font" [ngStyle]="{'background-color': note.note.color}" matInput
-                            cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMaxRows="5" disabled>{{note.note.description}}
+                        <textarea class="text description-font" [ngStyle]="{'background-color': note.note.color}"
+                            matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMaxRows="5"
+                            disabled>{{note.note.description}}
                                 </textarea>
                     </div>
                 </div>
@@ -36,6 +37,14 @@
                             </mat-chip>
                         </div>
                     </mat-chip-list>
+                </div>
+                <div fxLayout="row wrap" class="chip-list">
+                    <div *ngFor="let userInfo of note.collabUserInfo" fxLayoutAlign=" center">
+                        <button mat-icon-button class="collab-icon"
+                            matTooltip="{{userInfo.fullName}}<{{userInfo.emailId}}>">
+                            <div style="font-size: 24px;"> {{userInfo.emailId[0]}}</div>
+                        </button>
+                    </div>
                 </div>
                 <div class="icon-toolbar">
                     <div>

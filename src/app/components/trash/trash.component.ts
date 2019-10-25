@@ -32,6 +32,8 @@ export class TrashComponent implements OnInit {
   getTrashedNotes() {
     this.noteService.getAllNotes(true, false)
       .subscribe((response: any) => {
+        console.log(response);
+        
         this.trashNotes = response.body;
       });
   }

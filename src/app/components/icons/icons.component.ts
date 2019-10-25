@@ -1,9 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NoteService } from 'src/app/service/note.service';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialog } from '@angular/material';
 import { formatDate } from '@angular/common';
 import { FormGroup, FormControl } from '@angular/forms';
 import { LabelService } from 'src/app/service/label.service';
+import { CollabDialogComponent } from '../collab-dialog/collab-dialog.component';
 
 @Component({
   selector: 'app-icons',
@@ -19,16 +20,9 @@ export class IconsComponent implements OnInit {
   searchLabelName: string;
   @Input() noteInfo: any;
   @Output() updatedEvent = new EventEmitter<any>();
-  // @Output() updatedArchiveEvent = new EventEmitter<any>();
-
-  // @Input() labels: any;
   labels: any;
-  // @Input()
-  // set labels(labels) {
-  //   this.labels1 = labels;
-  // }
 
-  constructor(private noteService: NoteService, private snackBar: MatSnackBar, private labelService: LabelService) { }
+  constructor(private noteService: NoteService, private snackBar: MatSnackBar, private labelService: LabelService, private dialog: MatDialog) { }
 
   colorPalet = [
     [
@@ -221,5 +215,18 @@ export class IconsComponent implements OnInit {
           this.getLabels();
         }
       });
+  }
+
+  openCollabDialog(note: any)
+  { 
+    console.log(note);
+    
+    const dialogRef = this.dialog.open(CollabDialogComponent, {
+      width: '600px',
+      data:note
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      // this.updateService.changeUpdate(false,false);
+    }); 
   }
 }
