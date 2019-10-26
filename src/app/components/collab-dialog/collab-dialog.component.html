@@ -9,11 +9,46 @@
         </button>
         <div fxLayout="column">
             <span class="usernameStyle">
-                {{user.userName}}<span style="font-style: italic">(Owner)</span>
+                <!-- {{user.userName}} -->
+                <span style="font-style: italic">(Owner)</span>
             </span>
             <span class="emailStyle">
-                {{user.emailId}}
+                <!-- {{user.emailId}} -->
             </span>
         </div>
     </span>
+
+    <div *ngFor="let userInfo of userInfos; let tempId = index">
+        <span fxLayout="row" style="position: relative;">
+            <button mat-icon-button class="icon">
+                <mat-icon>person_outline</mat-icon>
+            </button>
+            <div fxLayout="column">
+                <span class="usernameStyle">
+                    {{userInfo.fullName}}
+                </span>
+                <span class="emailStyle">
+                    {{userInfo.emailId}}
+                </span>
+            </div>
+            <button mat-icon-button class="btnCollab" (click)="removeCollab(userInfo.emailId)">
+                <mat-icon>close</mat-icon>
+            </button>
+        </span>
     </div>
+    <span fxLayout="row" style="position: relative;">
+        <button mat-icon-button class="icon">
+            <mat-icon>person_add</mat-icon>
+        </button>
+        <input matInput #emailId type="email" (input)="getUser($event.target.value)" class="emailStyle"
+            placeholder="Enter the email-id...">
+        <button mat-icon-button class="btnCollab" (click)="addCollab()">
+            <mat-icon>done</mat-icon>
+        </button>
+    </span>
+
+</div>
+<div mat-dialog-actions class="actionDialog">
+    <button mat-raised-button class="actionButton" (click)="cancel" [mat-dialog-close]>Cancel</button>
+    <button mat-raised-button class="actionButton" (click)="save()" [mat-dialog-close]>Save</button>
+</div>

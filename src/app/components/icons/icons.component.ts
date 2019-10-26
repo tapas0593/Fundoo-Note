@@ -99,12 +99,12 @@ export class IconsComponent implements OnInit {
     }
 
     date = formatDate(tempDate, 'yyyy-MM-ddT20:00:00', 'en-IND', '+5:30');
-    this.noteService.addReminder(this.noteInfo.noteId, date)
+    this.noteService.addReminder(this.noteInfo.note.noteId, date)
       .subscribe((response: any) => {
         if (response.statusCode === 200) {
           this.snackBar.open(response.statusMessage, 'Undo', { duration: 2500 });
-          this.noteInfo = response.body;
-          this.updatedEvent.emit(this.noteInfo);
+          this.noteInfo.note = response.body;
+          // this.updatedEvent.emit(this.noteInfo);
         } else {
           this.snackBar.open(response.statusMessage, 'Undo', { duration: 2500 });
         }
@@ -123,19 +123,19 @@ export class IconsComponent implements OnInit {
 
   }
   archive() {
-    console.log('notes before archived: ' + this.noteInfo.archived);
-    this.noteInfo.archived = !this.noteInfo.archived;
-    this.noteService.updateNote(this.noteInfo)
+    console.log('notes before archived: ' + this.noteInfo.note.archived);
+    this.noteInfo.note.archived = !this.noteInfo.note.archived;
+    this.noteService.updateNote(this.noteInfo.note)
       .subscribe((response: any) => {
         if (response.statusCode === 200) {
           console.log(response);
-          this.noteInfo = response.body;
+          this.noteInfo.note = response.body;
           // console.log('event sent: ' + this.noteInfo);
           // this.updatedArchiveEvent.emit(this.noteInfo);
         } else {
           console.log(response);
         }
-        const statusMessage = this.noteInfo.archived ? 'Note was Archived.' : 'Note was Unarchived.';
+        const statusMessage = this.noteInfo.note.archived ? 'Note was Archived.' : 'Note was Unarchived.';
         this.snackBar.open(statusMessage, 'Undo', { duration: 2500 });
       });
     console.log('notes after archived: ' + this.noteInfo.archived);
@@ -146,8 +146,8 @@ export class IconsComponent implements OnInit {
   }
 
   setColor(colorHexCode: any) {
-    this.noteInfo.color = colorHexCode;
-    this.noteService.updateNote(this.noteInfo)
+    this.noteInfo.note.color = colorHexCode;
+    this.noteService.updateNote(this.noteInfo.note)
       .subscribe((response: any) => {
         if (response.statusCode === 200) {
           console.log(response);
@@ -157,8 +157,8 @@ export class IconsComponent implements OnInit {
       });
   }
   onDelete() {
-    this.noteInfo.trash = true;
-    this.noteService.updateNote(this.noteInfo)
+    this.noteInfo.note.trash = true;
+    this.noteService.updateNote(this.noteInfo.note)
       .subscribe((response: any) => {
         if (response.statusCode === 200) {
           console.log(response);
@@ -175,13 +175,13 @@ export class IconsComponent implements OnInit {
   addLabelToNote(isChecked: boolean, labelId: any) {
     console.log(isChecked);
     if (isChecked) {
-      this.noteService.addLabelToNote(labelId, this.noteInfo.noteId)
+      this.noteService.addLabelToNote(labelId, this.noteInfo.note.noteId)
         .subscribe((response: any) => {
           console.log(response);
           this.snackBar.open(response.statusMessage, 'Undo', { duration: 2500 });
         });
     } else {
-      this.removeLabelFromNote(labelId, this.noteInfo.noteId);
+      this.removeLabelFromNote(labelId, this.noteInfo.note.noteId);
     }
   }
 
@@ -217,13 +217,13 @@ export class IconsComponent implements OnInit {
       });
   }
 
-  openCollabDialog(note: any)
+  openCollabDialog()
   { 
-    console.log(note);
+    console.log(this.noteInfo);
     
     const dialogRef = this.dialog.open(CollabDialogComponent, {
       width: '600px',
-      data:note
+      data:this.noteInfo
     });
     dialogRef.afterClosed().subscribe(result => {
       // this.updateService.changeUpdate(false,false);

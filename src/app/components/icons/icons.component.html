@@ -12,8 +12,8 @@
         <mat-icon class=color><img src="assets/icons/image-24px.svg"></mat-icon>
     </button>
     <button mat-icon-button (click)="archive()">
-        <mat-icon class=color *ngIf="!noteInfo.archived"><img src="assets/icons/archive-24px.svg"></mat-icon>
-        <mat-icon class=color *ngIf="noteInfo.archived"><img src="assets/icons/unarchive-24px.svg"></mat-icon>
+        <mat-icon class=color *ngIf="!noteInfo.note.archived"><img src="assets/icons/archive-24px.svg"></mat-icon>
+        <mat-icon class=color *ngIf="noteInfo.note.archived"><img src="assets/icons/unarchive-24px.svg"></mat-icon>
     </button>
     <button mat-icon-button (click)="moreVert()" [matMenuTriggerFor]="menu_more">
         <mat-icon class=color>more_vert</mat-icon>

@@ -30,7 +30,7 @@ export class LabelService {
   }
   getLabeledNotes(labelId: bigint) {
     console.log('inside label Service ' + labelId);
-    
+
     return this.http.get(this.url + 'getLabeledNotes?labelId=' + labelId, httpOptions);
   }
 }

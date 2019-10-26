@@ -29,6 +29,7 @@ import { DisplayNotesComponent } from './components/display-notes/display-notes.
 import { ReminderNotesComponent } from './components/reminder-notes/reminder-notes.component';
 import { LabeledNoteComponent } from './components/labeled-note/labeled-note.component';
 import { CollabDialogComponent } from './components/collab-dialog/collab-dialog.component';
+import { CollaboratorService } from './service/collaborator.service';
 
 
 @NgModule({
@@ -63,7 +64,7 @@ import { CollabDialogComponent } from './components/collab-dialog/collab-dialog.
     HttpClientModule
   ],
   entryComponents: [UpdateNoteComponent, EditLabelComponent, CollabDialogComponent],
-  providers: [UserService, LabelService, NoteService, ViewService],
+  providers: [UserService, LabelService, NoteService, ViewService, CollaboratorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

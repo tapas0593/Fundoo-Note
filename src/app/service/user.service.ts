@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../model/user.model';
 import { Login } from '../model/login.model';
 import { ResetPassword } from '../model/resetpassword.model';
+
+const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json', jwt_token: localStorage.getItem('token') }) };
 
 @Injectable({
   providedIn: 'root'
@@ -31,5 +33,9 @@ export class UserService {
 
   verifyUser(token: string) {
     return this.httpClient.get(this.url + 'verify/' + token);
+  }
+
+  getUserByEmailId(emailId: string) {
+    return this.httpClient.get(this.url + 'email/' + emailId, httpOptions);
   }
 }
