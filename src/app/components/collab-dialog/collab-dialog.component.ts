@@ -22,7 +22,7 @@ export class CollabDialogComponent implements OnInit {
   ngOnInit() {
   }
 
-  getUser(emailId: string){
+  getUser(emailId: string) {
     this.userService.getUserByEmailId(emailId).subscribe(
       (response: any) => {
         if (response.statusCode === 200) {
@@ -30,7 +30,7 @@ export class CollabDialogComponent implements OnInit {
         }
       }
     );
-    // return this.userId;
+    return this.userId;
   }
 
   addCollab() {
@@ -55,32 +55,33 @@ export class CollabDialogComponent implements OnInit {
   }
   save() {
     for (let userInfo of this.userInfoList) {
-      let collabDTO = new CollaboratorDTO();
-      collabDTO.noteId = this.data.note.noteId;
-      // this.getUser(userInfo.emailId).subscribe((userId: any) => collabDTO.sharedToUserId = userId);
+      // let collabDTO = new CollaboratorDTO();
+      // let noteId= this.data.note.noteId;
+      // let sharedToUserId= this.getUser(userInfo.emailId);
+      // let sharedToUserId: bigint;      
+      // collabDTO.noteId = this.data.note.noteId;
       // collabDTO.sharedToUserId = this.getUser(userInfo.emailId);
-      this.collaboratorService.removeCollaborator(collabDTO).subscribe(
+      // this.userService.getUserByEmailId(userInfo.emailId).subscribe(
+      //   (response: any) => {
+      //     if (response.statusCode === 200) {
+      //       console.log(response);
+      //       sharedToUserId = response.body;
+      //     }
+      //   }
+      // );
+
+      console.log('Collaborator DTO in save()' + this.data.note.noteId + '->' + userInfo.emailId);
+      this.collaboratorService.removeCollaborator(this.data.note.noteId, userInfo.emailId).subscribe(
         (response: any) => {
           if (response.statusCode === 200) {
-            this.snackBar.open("Collaborator saved", "", { duration: 3000 })
-          }
-          console.log(response);
-
-        }
-      );
-
-
-      this.userService.getUserByEmailId(userInfo.emailId).subscribe(
-        (response: any) => {
-          if (response.statusCode === 200) {
-            console.log(response.body);
-            
-            collabDTO.sharedToUserId = response.body;
+            this.snackBar.open('Collaborator saved',  '', { duration: 3000 })
+            console.log(response);
+          } else {
+            this.snackBar.open('Collaborator not saved',  '', { duration: 3000 })
+            console.log(response);
           }
         }
       );
-      console.log('Collaborator DTO in save()' + collabDTO.noteId + '->' + collabDTO.sharedToUserId);
-      
     }
   }
 }

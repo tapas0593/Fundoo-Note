@@ -22,7 +22,12 @@ export class CollaboratorService {
     return this.http.post(this.url + 'addCollaborator', collabDTO, httpOptions);
   }
 
-  removeCollaborator(collabDTO: CollaboratorDTO) {
-    return this.http.post(this.url + "removeCollaborator", collabDTO, httpOptions);
+  // removeCollaborator(collabDTO: CollaboratorDTO) {
+  //   console.log(collabDTO);
+
+  //   return this.http.post(this.url + "removeCollaborator", collabDTO, httpOptions);
+  // }
+  removeCollaborator(noteId: bigint, sharedToUserId: bigint) {
+    return this.http.delete(this.url + 'removeCollaborator/' + noteId + '/' + sharedToUserId, httpOptions);
   }
 }
