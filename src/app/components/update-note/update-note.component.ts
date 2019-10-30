@@ -10,14 +10,16 @@ import { NoteService } from 'src/app/service/note.service';
 })
 export class UpdateNoteComponent implements OnInit {
   note: {};
+  fullNote= {};
   // labels: [];
   noteId = this.data.noteId;
-  title = new FormControl(this.data.title);
-  description = new FormControl(this.data.description);
+  title = new FormControl(this.data.note.title);
+  description = new FormControl(this.data.note.description);
   constructor(
     public dialogRef: MatDialogRef<UpdateNoteComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any, private noteService: NoteService, private snackBar: MatSnackBar) {
-    this.note = data.noteInfo;
+    this.note = data.note;
+    this.fullNote = data;
     // this.labels = data.labels;
   }
 

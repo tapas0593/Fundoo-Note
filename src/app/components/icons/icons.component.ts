@@ -138,7 +138,7 @@ export class IconsComponent implements OnInit {
         const statusMessage = this.noteInfo.note.archived ? 'Note was Archived.' : 'Note was Unarchived.';
         this.snackBar.open(statusMessage, 'Undo', { duration: 2500 });
       });
-    console.log('notes after archived: ' + this.noteInfo.archived);
+    console.log('notes after archived: ' + this.noteInfo.note.archived);
   }
 
   moreVert() {

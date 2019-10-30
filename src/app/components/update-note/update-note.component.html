@@ -41,7 +41,7 @@
 
             <div style="margin: 4px 4px 0;" flexLayout="row" fxLayoutAlign="space-between center">
                 <div class="appicons">
-                    <app-icons [noteInfo]=note (updatedEvent)="note = $event"></app-icons>
+                    <app-icons [noteInfo]="fullNote" (updatedEvent)="note = $event"></app-icons>
                 </div>
                 <div>
                     <button class="close-button" type="button" mat-button [mat-dialog-close]="note" (click)="onClose()">Close</button>

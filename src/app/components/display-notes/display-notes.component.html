@@ -4,7 +4,7 @@
         <div *ngFor="let note of notes; let tempId1 = index">
             <mat-card class="matcard1" [ngClass]="direction === 'row' ? 'grid-mat-card': 'list-mat-card'"
                 [ngStyle]="{'background-color': note.note.color}">
-                <div (click)="onUpdate(note.note, tempId1)">
+                <div (click)="onUpdate(note, tempId1)">
                     <div class="title">
                         <textarea class="text title-font" [ngStyle]="{'background-color': note.note.color}" matInput
                             cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMaxRows="5" disabled>{{note.note.title}}

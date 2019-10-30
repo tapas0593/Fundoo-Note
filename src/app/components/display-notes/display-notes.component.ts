@@ -45,14 +45,14 @@ export class DisplayNotesComponent implements OnInit {
     const dialogRef = this.dialog.open(UpdateNoteComponent, {
       width: '600px',
       height: 'auto',
-      data: { noteInfo: note, labels: this.labels },
+      data: note,
       disableClose: true,
       panelClass: 'custom-dialog-container',
     });
     dialogRef.afterClosed().subscribe(response => {
       console.log('The dialog was closed. Result: ' + response);
       // note = response;
-      this.notes.splice(tempId1, 1, response);
+      // this.notes.splice(tempId1, 1, response);
     });
   }
   onRemoveReminder(note: any) {
