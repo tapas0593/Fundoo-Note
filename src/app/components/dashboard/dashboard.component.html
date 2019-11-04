@@ -20,7 +20,7 @@
                         </button>
                         <input fxFlex="100" class="searchInputBox" placeholder="Search">
                         <button mat-icon-button>
-                            <mat-icon (click)=close()>close</mat-icon>
+                            <mat-icon>close</mat-icon>
                         </button>
                     </mat-card>
                 </div>
@@ -43,7 +43,7 @@
                     <button mat-icon-button fxShow="true" fxHide.sm>
                         <mat-icon>apps</mat-icon>
                     </button>
-                    <button mat-icon-button class="profileButton" [matMenuTriggerFor]="profileMenu" (click)="account()"
+                    <button mat-icon-button class="profileButton" [matMenuTriggerFor]="profileMenu"
                         fxShow="true">
                         <img class="profilepic" src="/assets/images/profile.jpg">
                     </button>

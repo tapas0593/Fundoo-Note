@@ -55,21 +55,6 @@ export class CollabDialogComponent implements OnInit {
   }
   save() {
     for (let userInfo of this.userInfoList) {
-      // let collabDTO = new CollaboratorDTO();
-      // let noteId= this.data.note.noteId;
-      // let sharedToUserId= this.getUser(userInfo.emailId);
-      // let sharedToUserId: bigint;      
-      // collabDTO.noteId = this.data.note.noteId;
-      // collabDTO.sharedToUserId = this.getUser(userInfo.emailId);
-      // this.userService.getUserByEmailId(userInfo.emailId).subscribe(
-      //   (response: any) => {
-      //     if (response.statusCode === 200) {
-      //       console.log(response);
-      //       sharedToUserId = response.body;
-      //     }
-      //   }
-      // );
-
       console.log('Collaborator DTO in save()' + this.data.note.noteId + '->' + userInfo.emailId);
       this.collaboratorService.removeCollaborator(this.data.note.noteId, userInfo.emailId).subscribe(
         (response: any) => {
