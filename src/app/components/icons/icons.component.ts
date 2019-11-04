@@ -16,7 +16,7 @@ export class IconsComponent implements OnInit {
   formGroup: FormGroup;
 
   now = new Date();
-  private show = false;
+  show = false;
   searchLabelName: string;
   @Input() noteInfo: any;
   @Output() updatedEvent = new EventEmitter<any>();

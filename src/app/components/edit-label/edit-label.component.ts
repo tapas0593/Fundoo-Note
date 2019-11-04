@@ -14,7 +14,7 @@ export class EditLabelComponent implements OnInit {
   formGroup: FormGroup;
 
   constructor(public dialogRef: MatDialogRef<EditLabelComponent>,
-              @Inject(MAT_DIALOG_DATA) private labels: Label[],
+              @Inject(MAT_DIALOG_DATA) public labels: Label[],
               private labelService: LabelService, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
