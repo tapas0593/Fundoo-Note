@@ -9,8 +9,8 @@ import { NoteService } from 'src/app/service/note.service';
   styleUrls: ['./update-note.component.scss']
 })
 export class UpdateNoteComponent implements OnInit {
-  note: {};
-  fullNote= {};
+  public note: any;
+  public fullNote: any;
   // labels: [];
   noteId = this.data.noteId;
   title = new FormControl(this.data.note.title);
@@ -38,7 +38,7 @@ export class UpdateNoteComponent implements OnInit {
           this.snackBar.open('Note Updation Unsuccessful', 'Undo', { duration: 2500 });
         }
       });
-    this.dialogRef.close(this.note);
+    this.dialogRef.close(this.fullNote);
   }
   onRemoveReminder(note: any) {
     this.noteService.removeReminder(note.noteId)
